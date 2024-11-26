@@ -1,0 +1,17 @@
+{
+  "jokes": {
+    "name": "Jokes",
+    "icon": "J",
+    "description": "Jokes descrition"
+  },
+  "Partners": {
+    "name": "Partners",
+    "icon": "P",
+    "description": "Partners descrition"
+  },
+  "Friends": {
+    "name": "Friends",
+    "icon": "F",
+    "description": "Friends descrition"
+  }
+}
