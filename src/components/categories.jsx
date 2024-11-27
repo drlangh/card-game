@@ -5,7 +5,6 @@ import { IoMdArrowBack } from 'react-icons/io';
 import useInformationStore from '@/stores/InformationStore';
 import { IoAlertCircleOutline } from 'react-icons/io5';
 import DummySVG from '@/../public/dummy.svg';
-import GeminiSVG from '@/../public/gemini.svg';
 
 const categories = [
   { svgComponent: DummySVG, name: 'Defining Masculinity' },
