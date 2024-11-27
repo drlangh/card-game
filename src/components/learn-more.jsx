@@ -21,7 +21,9 @@ export default function LearnMorePopup({
     const info = await getMoreInformation(cardData, age, category);
 
     if (info.includes('error')) {
-      toast.error('Error generating more information. Please try again.');
+      toast.error(
+        'Error generating more information. Please try again.'
+      );
       onClose();
       return;
     }
@@ -54,6 +56,7 @@ export default function LearnMorePopup({
             Learn More
           </h2>
           <div className="text-gray-700 mb-6 prose prose-sm max-w-none">
+            {/* decrease the size of the line break */}
             <ReactMarkdown className="whitespace-pre-wrap">
               {learnMoreInfo}
             </ReactMarkdown>

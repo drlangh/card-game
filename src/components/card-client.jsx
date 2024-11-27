@@ -1,14 +1,13 @@
 'use client';
 
-import { useState } from 'react';
 import { getCard } from '@/api/gemini';
 import { Card, MainButton } from '@/components';
-import { IoMdArrowBack } from 'react-icons/io';
+import useInformationStore from '@/stores/InformationStore';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import useInformationStore from '@/stores/InformationStore';
+import { useState } from 'react';
+import { IoMdArrowBack } from 'react-icons/io';
 import LearnMorePopup from './learn-more';
-import { toast } from 'react-toastify';
 
 export default function CardClient() {
   const { age, category } = useInformationStore();
@@ -87,7 +86,6 @@ export default function CardClient() {
                   setLearnMoreInfo(null);
                   await getCard(age, category).then((params) => {
                     if (!params) {
-                      toast.error('Error generating card. Please try again.');
                       setRotating(false);
                       return;
                     }
