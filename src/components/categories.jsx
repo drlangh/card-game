@@ -3,55 +3,21 @@ import Link from 'next/link';
 import { MainButton } from '.';
 import { IoMdArrowBack } from 'react-icons/io';
 import useInformationStore from '@/stores/InformationStore';
-import dynamic from 'next/dynamic';
-import { useEffect, useState, useRef } from 'react';
 import { IoAlertCircleOutline } from 'react-icons/io5';
+import DummySVG from '@/../public/dummy.svg';
+import GeminiSVG from '@/../public/gemini.svg';
 
 const categories = [
-  { svgPath: 'dummy.svg', name: 'Defining Masculinity' },
-  { svgPath: 'dummy.svg', name: 'Toxic Masculinity' },
-  { svgPath: 'dummy.svg', name: 'The Role of Men and Boys' },
-  { svgPath: 'dummy.svg', name: 'Changing the Context' },
-  { svgPath: 'dummy.svg', name: 'Personal Reflections' },
+  { svgComponent: DummySVG, name: 'Defining Masculinity' },
+  { svgComponent: DummySVG, name: 'Toxic Masculinity' },
+  { svgComponent: DummySVG, name: 'The Role of Men and Boys' },
+  { svgComponent: DummySVG, name: 'Changing the Context' },
+  { svgComponent: DummySVG, name: 'Personal Reflections' },
 ];
 
 export default function Categories({ setStep }) {
   const { category, setCategory } = useInformationStore();
-  const [svgComponents, setSvgComponents] = useState({});
   const [missingCategory, setMissingCategory] = useState(false);
-  const preloadedSVGs = useRef({});
-
-  useEffect(() => {
-    const preloadSVGs = async () => {
-      const svgPaths = ['dummy.svg', 'gemini.svg'];
-      for (const path of svgPaths) {
-        const response = await fetch(`/public/${path}`);
-        const svgText = await response.text();
-        preloadedSVGs.current[path] = svgText;
-      }
-    };
-
-    preloadSVGs();
-  }, []);
-
-  useEffect(() => {
-    const loadSVGs = async () => {
-      const components = {};
-      for (const cat of categories) {
-        const Component = await dynamic(
-          () =>
-            import(`@/../public/${cat.svgPath}`).then(
-              (mod) => mod.default || mod
-            ),
-          { ssr: false }
-        );
-        components[cat.name] = Component;
-      }
-      setSvgComponents(components);
-    };
-
-    loadSVGs();
-  }, []);
 
   return (
     <>
@@ -71,7 +37,7 @@ export default function Categories({ setStep }) {
         </h1>
         <div className="w-full px-3 flex flex-wrap gap-5 mt-8 items-center justify-center">
           {categories.map((cat, index) => {
-            const SVGComponent = svgComponents[cat.name];
+            const SVGComponent = cat.svgComponent;
 
             return (
               <div
