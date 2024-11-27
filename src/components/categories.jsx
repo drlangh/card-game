@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { MainButton } from '.';
 import { IoMdArrowBack } from 'react-icons/io';
 import useInformationStore from '@/stores/InformationStore';
+import { useState } from 'react';
 import { IoAlertCircleOutline } from 'react-icons/io5';
 import DummySVG from '@/../public/dummy.svg';
 
