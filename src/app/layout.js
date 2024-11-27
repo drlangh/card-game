@@ -13,8 +13,9 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: 'Card game',
-  description: 'Card game',
+  title: 'Healthy vs. Toxic Masculinity',
+  description:
+    'Explore meaningful conversation starter cards about healthy and toxic masculinity by challenging stereotypes, spark dialogue, and foster growth in a safe, judgment-free space. Start building a more authentic and inclusive masculinity today!',
 };
 
 export default function RootLayout({ children }) {
