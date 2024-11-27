@@ -25,7 +25,10 @@ export async function getCard(age, category) {
         .replace(/,\s*}/g, '}')
         .replace(/,\s*]/g, ']');
 
-      cardData = JSON.parse(validJsonString);
+      const result =
+        validJsonString.slice(0, -1) + ', "status": 200 }';
+
+      cardData = JSON.parse(result);
       return cardData;
     } catch (error) {
       console.error('Error generating card:', error);
@@ -40,6 +43,7 @@ export async function getCard(age, category) {
             error instanceof SyntaxError
               ? 'https://www.thehotline.org/'
               : '#',
+          status: 500,
         };
         return cardData;
       }
@@ -60,7 +64,6 @@ export async function getMoreInformation(content, age, category) {
     try {
       const completion = await model.generateContent(prompt2);
       moreInformation = completion.response.text().trim();
-      console.log(prompt2);
 
       return moreInformation;
     } catch (error) {

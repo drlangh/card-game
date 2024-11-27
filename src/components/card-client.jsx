@@ -16,6 +16,7 @@ export default function CardClient() {
   );
   const [rotating, setRotating] = useState(false);
   const [link, setLink] = useState(null);
+  const [status, setStatus] = useState(null);
   const [cardReady, setCardReady] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [learnMoreInfo, setLearnMoreInfo] = useState(null);
@@ -57,12 +58,14 @@ export default function CardClient() {
         </h1>
         <div
           className={`w-10/12 lg:w-1/3 md:mb-4 flex flex-row items-center ${
-            !rotating && link ? 'justify-between' : 'justify-center'
+            !rotating && status === 200
+              ? 'justify-between'
+              : 'justify-center'
           }`}
         >
           {!rotating ? (
             <>
-              {link && (
+              {status === 200 && (
                 <button
                   onClick={() => setShowPopup(true)}
                   className="pointer-events-auto text-white flex flex-row items-center gap-2 rounded-full py-3 px-9 border-2 hover:border-white hover:shadow-[0px_0px_15px_3px_rgba(255,255,224,0.8)] transition-all duration-300"
@@ -84,9 +87,10 @@ export default function CardClient() {
                   await getCard(age, category).then((params) => {
                     if (!params) return;
 
-                    const { content, link } = params;
+                    const { content, link, status } = params;
                     setCardData(content);
                     setLink(link);
+                    setStatus(status);
                     setRotating(false);
                   });
                 }}

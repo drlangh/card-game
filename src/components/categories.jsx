@@ -85,7 +85,7 @@ export default function Categories({ setStep }) {
           })}
         </div>
         {missingCategory && (
-          <span className="w-full items-center justify-center mt-4 flex flex-row gap-1 text-red-700 text-sm">
+          <span className="w-full items-center justify-center mt-4 flex flex-row gap-1 text-red-200 text-sm">
             <IoAlertCircleOutline size={20} />
             <p>Please select a category to continue</p>
           </span>

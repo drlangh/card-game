@@ -34,38 +34,43 @@ export default function LearnMorePopup({
         className="absolute inset-0 bg-black bg-opacity-80 transition-opacity duration-300"
         onClick={onClose}
       ></div>
-      <div className="bg-white bg-opacity-90 rounded-lg p-16 z-60 relative w-3/4 max-h-[80vh] overflow-y-auto transform transition-transform duration-300">
-        <button
-          className="absolute top-4 right-4 text-gray-600 hover:text-gray-800"
-          onClick={onClose}
-        >
-          <IoClose size={24} />
-        </button>
-        <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">
-          Learn More
-        </h2>
-        <div className="text-gray-700 mb-6 prose prose-sm max-w-none">
-          {learnMoreInfo ? (
-            <ReactMarkdown>{learnMoreInfo}</ReactMarkdown>
-          ) : (
-            <p>Loading...</p>
+
+      {learnMoreInfo ? (
+        <div className="bg-white bg-opacity-90 rounded-lg p-16 pt-10 z-60 relative w-3/4 max-h-[80vh] overflow-y-auto overflow-x-hidden transform transition-transform duration-300">
+          <button
+            className="sticky top-4 -mr-7 float-right text-gray-600 hover:text-gray-800"
+            onClick={onClose}
+          >
+            <IoClose size={24} />
+          </button>
+          <h2 className="text-2xl font-bold mb-4 text-center text-gray-800  clear-right">
+            Learn More
+          </h2>
+          <div className="text-gray-700 mb-6 prose prose-sm max-w-none">
+            <ReactMarkdown className="whitespace-pre-wrap">
+              {learnMoreInfo}
+            </ReactMarkdown>
+          </div>
+          {link && (
+            <div className="text-center">
+              <a
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-blue-600 bg-opacity-60 hover:bg-opacity-80 text-white py-2 px-6 rounded-full transition-all duration-300"
+              >
+                <RxExternalLink
+                  size={20}
+                  className="inline-block -mt-1 mr-2"
+                />
+                Visit Resource
+              </a>
+            </div>
           )}
         </div>
-        <div className="text-center">
-          <a
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-blue-600 bg-opacity-60 hover:bg-opacity-80 text-white py-2 px-6 rounded-full transition-all duration-300"
-          >
-            <RxExternalLink
-              size={20}
-              className="inline-block -mt-1 mr-2"
-            />
-            Visit Resource
-          </a>
-        </div>
-      </div>
+      ) : (
+        <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-white"></div>
+      )}
     </div>
   );
 }
