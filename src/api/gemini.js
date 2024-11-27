@@ -1,15 +1,17 @@
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const promptConfig = require('@/json/prompt.json'); // Renamed to avoid shadowing
 
+const maxTries = 3;
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({
   model: process.env.GEMINI_MODEL,
 });
-const maxTries = 3;
 
 export async function getCard(age, category) {
-  const prompt1 = promptConfig.prompt1;
   let cardData;
+  const prompt1 = promptConfig.prompt1
+    .replace(/{age}/g, age)
+    .replace(/{category}/g, category.name);
 
   for (let tries = 0; tries < maxTries; tries++) {
     try {
@@ -18,9 +20,7 @@ export async function getCard(age, category) {
 
       const validJsonString = assistantReply
         .replace(/,\s*}/g, '}')
-        .replace(/,\s*]/g, ']')
-        .replace(/{age}/g, age)
-        .replace(/{category}/g, category.name);
+        .replace(/,\s*]/g, ']');
 
       cardData = JSON.parse(validJsonString);
       return cardData;

@@ -8,10 +8,11 @@ import { useEffect, useState } from 'react';
 import { IoAlertCircleOutline } from 'react-icons/io5';
 
 const categories = [
-  { svgPath: 'dummy.svg', name: 'Self' },
-  { svgPath: 'dummy.svg', name: 'Health' },
-  { svgPath: 'dummy.svg', name: 'Peers' },
-  { svgPath: 'dummy.svg', name: 'Culture' },
+  { svgPath: 'dummy.svg', name: 'Defining Masculinity' },
+  { svgPath: 'dummy.svg', name: 'Toxic Masculinity' },
+  { svgPath: 'dummy.svg', name: 'The Role of Men and Boys' },
+  { svgPath: 'dummy.svg', name: 'Changing the Context' },
+  { svgPath: 'dummy.svg', name: 'Personal Reflections' },
 ];
 
 export default function Categories({ setStep }) {
@@ -49,7 +50,7 @@ export default function Categories({ setStep }) {
         <h1 className="text-5xl md:text-6xl font-bold pointer-events-auto">
           Select a category
         </h1>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+        <div className="w-full px-3 flex flex-wrap gap-5 mt-8 items-center justify-center">
           {categories.map((cat, index) => {
             const SVGComponent = svgComponents[cat.name];
 
@@ -60,9 +61,9 @@ export default function Categories({ setStep }) {
                   setCategory(cat);
                   setMissingCategory(false);
                 }}
-                className={`text-[#5A5A7A] flex items-center bg-white justify-center flex-col h-[7.5rem] w-[7.5rem] cursor-pointer rounded-full transition-all duration-100 ${
+                className={`text-[#5A5A7A] flex items-center bg-white justify-center flex-col h-36 w-36 p-4 cursor-pointer rounded-full transition-all duration-100 ${
                   category && category.name === cat.name
-                    ? 'bg-opacity-80 text-[#4545c4] font-medium shadow-[0px_0px_15px_3px_#9a9cfe9e]'
+                    ? 'bg-opacity-80 text-[#4545c4] font-medium shadow-[0px_0px_15px_3px_#9a9cfe9e] scale-110'
                     : 'bg-opacity-40'
                 }`}
               >
@@ -71,7 +72,9 @@ export default function Categories({ setStep }) {
                 ) : (
                   <div className="w-12 h-12 mb-2 bg-gray-200 rounded-full animate-pulse" />
                 )}
-                <span>{cat.name}</span>
+                <span className="text-center text-sm">
+                  {cat.name}
+                </span>
               </div>
             );
           })}
