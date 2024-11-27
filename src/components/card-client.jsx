@@ -23,7 +23,6 @@ export default function CardClient() {
 
   if (!age || !category) {
     redirect('/choice');
-    return null;
   }
 
   return (

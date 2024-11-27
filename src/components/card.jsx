@@ -3,7 +3,6 @@
 import useIsMobile from '@/hooks/useIsMobile';
 import {
   Center,
-  PerspectiveCamera,
   PresentationControls,
   RoundedBox,
   Svg,

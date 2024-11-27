@@ -8,11 +8,31 @@ import { IoAlertCircleOutline } from 'react-icons/io5';
 import DummySVG from '@/../public/dummy.svg';
 
 const categories = [
-  { svgComponent: DummySVG, name: 'Defining Masculinity' },
-  { svgComponent: DummySVG, name: 'Toxic Masculinity' },
-  { svgComponent: DummySVG, name: 'The Role of Men and Boys' },
-  { svgComponent: DummySVG, name: 'Changing the Context' },
-  { svgComponent: DummySVG, name: 'Personal Reflections' },
+  {
+    svgComponent: DummySVG,
+    name: 'Defining Masculinity',
+    svgPath: '/dummy.svg',
+  },
+  {
+    svgComponent: DummySVG,
+    name: 'Toxic Masculinity',
+    svgPath: '/dummy.svg',
+  },
+  {
+    svgComponent: DummySVG,
+    name: 'The Role of Men and Boys',
+    svgPath: '/dummy.svg',
+  },
+  {
+    svgComponent: DummySVG,
+    name: 'Changing the Context',
+    svgPath: '/dummy.svg',
+  },
+  {
+    svgComponent: DummySVG,
+    name: 'Personal Reflections',
+    svgPath: '/dummy.svg',
+  },
 ];
 
 export default function Categories({ setStep }) {
