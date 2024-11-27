@@ -1,7 +1,7 @@
 'use client';
 
 import useInformationStore from '@/stores/InformationStore';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 import { RxExternalLink } from 'react-icons/rx';
 import { getMoreInformation } from '@/api/gemini';
@@ -17,7 +17,7 @@ export default function LearnMorePopup({
 }) {
   const { age, category } = useInformationStore();
 
-  const fetchMoreInformation = async () => {
+  const fetchMoreInformation = useCallback(async () => {
     const info = await getMoreInformation(cardData, age, category);
 
     if (info.includes('error')) {
@@ -29,7 +29,7 @@ export default function LearnMorePopup({
     }
 
     setLearnMoreInfo(info);
-  };
+  }, [cardData, age, category, onClose, setLearnMoreInfo]);
 
   useEffect(() => {
     if (learnMoreInfo) return;
