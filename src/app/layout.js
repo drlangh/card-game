@@ -1,5 +1,6 @@
 import './globals.css';
 import { Josefin_Sans, Poppins } from 'next/font/google';
+import { ToastContainer } from 'react-toastify';
 
 const josefinSans = Josefin_Sans({
   subsets: ['latin'],
@@ -27,6 +28,7 @@ export default function RootLayout({ children }) {
         <div className="flex items-center justify-center w-screen h-screen">
           {children}
         </div>
+        <ToastContainer />
       </body>
     </html>
   );

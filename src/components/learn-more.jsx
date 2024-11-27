@@ -6,6 +6,7 @@ import { IoClose } from 'react-icons/io5';
 import { RxExternalLink } from 'react-icons/rx';
 import { getMoreInformation } from '@/api/gemini';
 import ReactMarkdown from 'react-markdown';
+import { toast } from 'react-toastify';
 
 export default function LearnMorePopup({
   cardData,
@@ -18,6 +19,12 @@ export default function LearnMorePopup({
 
   const fetchMoreInformation = async () => {
     const info = await getMoreInformation(cardData, age, category);
+
+    if (info.includes('error')) {
+      toast.error('Error generating more information. Please try again.');
+      onClose();
+      return;
+    }
 
     setLearnMoreInfo(info);
   };
