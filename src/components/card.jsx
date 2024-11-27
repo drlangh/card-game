@@ -150,7 +150,12 @@ const Card = ({ cardData, rotating, category, isMobile }) => {
   );
 };
 
-const CardScene = ({ cardData, rotating, category }) => {
+const CardScene = ({
+  cardData,
+  rotating,
+  category,
+  setCardReady,
+}) => {
   const isMobile = useIsMobile();
 
   return (
@@ -160,6 +165,9 @@ const CardScene = ({ cardData, rotating, category }) => {
         fov: 50,
       }}
       style={{ width: '100%', height: '100%' }}
+      onCreated={({ gl }) => {
+        setCardReady(true);
+      }}
     >
       <PresentationControls
         global
