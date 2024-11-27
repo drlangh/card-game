@@ -4,7 +4,7 @@ import { MainButton } from '.';
 import { IoMdArrowBack } from 'react-icons/io';
 import useInformationStore from '@/stores/InformationStore';
 import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { IoAlertCircleOutline } from 'react-icons/io5';
 
 const categories = [
@@ -19,6 +19,20 @@ export default function Categories({ setStep }) {
   const { category, setCategory } = useInformationStore();
   const [svgComponents, setSvgComponents] = useState({});
   const [missingCategory, setMissingCategory] = useState(false);
+  const preloadedSVGs = useRef({});
+
+  useEffect(() => {
+    const preloadSVGs = async () => {
+      const svgPaths = ['dummy.svg', 'gemini.svg'];
+      for (const path of svgPaths) {
+        const response = await fetch(`/public/${path}`);
+        const svgText = await response.text();
+        preloadedSVGs.current[path] = svgText;
+      }
+    };
+
+    preloadSVGs();
+  }, []);
 
   useEffect(() => {
     const loadSVGs = async () => {
