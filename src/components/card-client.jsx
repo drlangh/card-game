@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import useInformationStore from '@/stores/InformationStore';
 import LearnMorePopup from './learn-more';
+import { toast } from 'react-toastify';
 
 export default function CardClient() {
   const { age, category } = useInformationStore();
@@ -85,7 +86,11 @@ export default function CardClient() {
                   setLink(null);
                   setLearnMoreInfo(null);
                   await getCard(age, category).then((params) => {
-                    if (!params) return;
+                    if (!params) {
+                      toast.error('Error generating card. Please try again.');
+                      setRotating(false);
+                      return;
+                    }
 
                     const { content, link, status } = params;
                     setCardData(content);

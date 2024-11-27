@@ -1,3 +1,5 @@
+@import 'react-toastify/dist/ReactToastify.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -70,4 +72,27 @@ select {
 select:focus {
   outline: none;
   border: none;
+}
+
+/* Custom styles for toast notifications */
+.Toastify__toast {
+  background-color: #333;
+  color: #fff;
+  font-family: var(--josefin-sans);
+}
+
+.Toastify__toast--error {
+  background-color: #ff4d4d;
+}
+
+.Toastify__toast--success {
+  background-color: #4caf50;
+}
+
+.Toastify__toast-body {
+  font-size: 1rem;
+}
+
+.Toastify__progress-bar {
+  background-color: #fff;
 }
