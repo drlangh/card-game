@@ -3,8 +3,9 @@ const promptConfig = require('@/json/prompt.json'); // Renamed to avoid shadowin
 
 const maxTries = 3;
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+// models available: 'gemini-1.5-pro', 'gemini-1.5-flash-8b', 'gemini-1.5-flash', 'aqa'
 const model = genAI.getGenerativeModel({
-  model: process.env.GEMINI_MODEL,
+  model: 'gemini-1.5-flash-8b',
 });
 
 export async function getCard(age, category) {
