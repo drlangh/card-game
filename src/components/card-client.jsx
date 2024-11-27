@@ -7,6 +7,7 @@ import { IoMdArrowBack } from 'react-icons/io';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import useInformationStore from '@/stores/InformationStore';
+import LearnMorePopup from './learn-more';
 
 export default function CardClient() {
   const { age, category } = useInformationStore();
@@ -16,6 +17,8 @@ export default function CardClient() {
   const [rotating, setRotating] = useState(false);
   const [link, setLink] = useState(null);
   const [cardReady, setCardReady] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [learnMoreInfo, setLearnMoreInfo] = useState(null);
 
   if (!age || !category) {
     redirect('/choice');
@@ -60,7 +63,10 @@ export default function CardClient() {
           {!rotating ? (
             <>
               {link && (
-                <button className="pointer-events-auto text-white flex flex-row items-center gap-2 rounded-full py-3 px-9 border-2 hover:border-white hover:shadow-[0px_0px_15px_3px_rgba(255,255,224,0.8)] transition-all duration-300">
+                <button
+                  onClick={() => setShowPopup(true)}
+                  className="pointer-events-auto text-white flex flex-row items-center gap-2 rounded-full py-3 px-9 border-2 hover:border-white hover:shadow-[0px_0px_15px_3px_rgba(255,255,224,0.8)] transition-all duration-300"
+                >
                   Learn More
                 </button>
               )}
@@ -73,6 +79,8 @@ export default function CardClient() {
                 onClick={async () => {
                   setRotating(true);
                   setCardData('');
+                  setLink(null);
+                  setLearnMoreInfo(null);
                   await getCard(age, category).then((params) => {
                     if (!params) return;
 
@@ -91,6 +99,15 @@ export default function CardClient() {
           )}
         </div>
       </div>
+      {showPopup && (
+        <LearnMorePopup
+          cardData={cardData}
+          link={link}
+          onClose={() => setShowPopup(false)}
+          learnMoreInfo={learnMoreInfo}
+          setLearnMoreInfo={setLearnMoreInfo}
+        />
+      )}
     </>
   );
 }

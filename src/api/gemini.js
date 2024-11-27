@@ -25,30 +25,51 @@ export async function getCard(age, category) {
       cardData = JSON.parse(validJsonString);
       return cardData;
     } catch (error) {
-      if (error instanceof SyntaxError) {
-        // JSON parsing error
-        console.error('Error parsing assistant reply:', error);
-      } else {
-        // Error generating content
-        console.error('Error generating card:', error);
+      console.error('Error generating card:', error);
+
+      if (tries === maxTries - 1) {
+        cardData = {
+          content:
+            error instanceof SyntaxError
+              ? 'Everyone deserves to feel safe and respected. Learn how you can help.'
+              : 'An error occurred while generating the card. Please try again.',
+          link:
+            error instanceof SyntaxError
+              ? 'https://www.thehotline.org/'
+              : '#',
+        };
+        return cardData;
       }
 
-      // If this was the last attempt, return default cardData
+      await new Promise((res) => setTimeout(res, 1000));
+    }
+  }
+}
+
+export async function getMoreInformation(content, age, category) {
+  let moreInformation;
+  const prompt2 = promptConfig.prompt2
+    .replace(/{age}/g, age)
+    .replace(/{category}/g, category.name)
+    .replace(/{content}/g, content);
+
+  for (let tries = 0; tries < maxTries; tries++) {
+    try {
+      const completion = await model.generateContent(prompt2);
+      moreInformation = completion.response.text().trim();
+      console.log(prompt2);
+
+      return moreInformation;
+    } catch (error) {
+      console.error('Error generating more information:', error);
+
       if (tries === maxTries - 1) {
-        if (error instanceof SyntaxError) {
-          cardData = {
-            content:
-              'Everyone deserves to feel safe and respected. Learn how you can help.',
-            link: 'https://www.thehotline.org/',
-          };
-        } else {
-          cardData = {
-            content:
-              'An error occurred while generating the card. Please try again.',
-            link: '#',
-          };
-        }
-        return cardData;
+        moreInformation =
+          error instanceof SyntaxError
+            ? 'Everyone deserves to feel safe and respected. Learn how you can help.'
+            : 'An error occurred while generating more information. Please try again.';
+
+        return moreInformation;
       }
 
       await new Promise((res) => setTimeout(res, 1000));

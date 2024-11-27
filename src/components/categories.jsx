@@ -24,10 +24,12 @@ export default function Categories({ setStep }) {
     const loadSVGs = async () => {
       const components = {};
       for (const cat of categories) {
-        const Component = await dynamic(() =>
-          import(`@/../public/${cat.svgPath}`).then(
-            (mod) => mod.default || mod
-          )
+        const Component = await dynamic(
+          () =>
+            import(`@/../public/${cat.svgPath}`).then(
+              (mod) => mod.default || mod
+            ),
+          { ssr: false }
         );
         components[cat.name] = Component;
       }
@@ -73,7 +75,7 @@ export default function Categories({ setStep }) {
                 {SVGComponent ? (
                   <SVGComponent className="w-11 h-11 mb-2" />
                 ) : (
-                  <div className="w-12 h-12 mb-2 bg-gray-200 rounded-full animate-pulse" />
+                  <div className="w-11 h-11 mb-2 bg-gray-200 rounded-full animate-pulse" />
                 )}
                 <span className="text-center text-sm">
                   {cat.name}
