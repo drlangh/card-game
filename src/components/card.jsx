@@ -104,7 +104,7 @@ const Card = ({ cardData, rotating, category, isMobile }) => {
         anchorX="center"
         fontWeight={500}
         anchorY="middle"
-        fontSize={isMobile ? 0.16 : 0.1}
+        fontSize={isMobile ? 0.145 : 0.1}
         maxWidth={isMobile ? 1.8 : 3.2}
       >
         {cardData}
