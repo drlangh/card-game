@@ -19,6 +19,16 @@ export default function LearnMorePopup({
 }) {
   const { age, category } = useInformationStore();
 
+  const [rotatingText, setRotatingText] = useState('');
+  const [textIndex, setTextIndex] = useState(0);
+  const loadingTexts = [
+    'Preparing your information...',
+    'Gathering insights...',
+    'Fetching details...',
+    'Compiling data...',
+    'Almost there...'
+  ];
+
   const fetchMoreInformation = useCallback(async () => {
     const info = await getMoreInformation(cardData, age, category);
 
@@ -38,6 +48,18 @@ export default function LearnMorePopup({
 
     fetchMoreInformation();
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTextIndex((prevIndex) => (prevIndex + 1) % loadingTexts.length);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    setRotatingText(loadingTexts[textIndex]);
+  }, [textIndex]);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -79,7 +101,10 @@ export default function LearnMorePopup({
           </div>
         </div>
       ) : (
-        <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-white"></div>
+        <div className="flex flex-col items-center">
+          <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-white"></div>
+          <p className="text-white mt-4">{rotatingText}</p>
+        </div>
       )}
     </div>
   );
