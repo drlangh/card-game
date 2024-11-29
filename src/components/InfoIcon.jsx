@@ -6,7 +6,7 @@ const InfoIcon = () => {
   const [showTooltip, setShowTooltip] = useState(false);
 
   return (
-    <div className="relative z-[10000]">
+    <div className="relative z-20">
       <IoMdInformationCircleOutline
         size={24}
         color="#fff"
