@@ -59,7 +59,7 @@ export default function Categories({ setStep }) {
         <h1 className="text-4xl w-2/3 md:w-auto md:text-6xl font-bold pointer-events-auto text-center">
           Select a category
         </h1>
-        <div className="w-full px-3 flex flex-wrap gap-5 mt-8 items-center justify-center">
+        <div className="w-full px-3 flex flex-wrap gap-3 md:gap-5 mt-8 items-center justify-center">
           {categories.map((cat, index) => {
             const SVGComponent = cat.svgComponent;
 

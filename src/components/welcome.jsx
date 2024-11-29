@@ -4,8 +4,8 @@ import GeminiLogo from '@/../public/gemini.svg';
 
 export default function Welcome() {
   return (
-    <div className="w-12/12 h-full flex items-center justify-center flex-col py-16 px-6 md:px-32 gap-4">
-      <h1 className="text-6xl md:text-7xl font-bold text-white drop-shadow-text text-center">
+    <div className="w-full h-full flex items-center justify-center flex-col py-16 px-6 md:px-32 gap-4">
+      <h1 className="text-5xl md:text-7xl font-bold text-white drop-shadow-text text-center">
         Healthy vs. Toxic Masculinity
       </h1>
       <p className="text-base md:text-lg text-white mb-14 drop-shadow-text text-center">
