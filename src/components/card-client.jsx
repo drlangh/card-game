@@ -45,7 +45,7 @@ export default function CardClient() {
           className="
           text-center
           text-3xl
-          w-8/12
+          w-7/12
           md:text-4xl
           font-bold
           pointer-events-auto
@@ -55,7 +55,7 @@ export default function CardClient() {
           {category && category.name}
         </h1>
         <div
-          className={`w-10/12 gap-6 lg:w-1/3 md:mb-4 flex flex-row items-center ${
+          className={`w-10/12 gap-6 mb-16 lg:w-1/3 md:mb-4 flex flex-row items-center ${
             !rotating && status === 200
               ? 'justify-between'
               : 'justify-center'

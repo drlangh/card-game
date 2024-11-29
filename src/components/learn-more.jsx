@@ -73,7 +73,7 @@ export default function LearnMorePopup({
       ></div>
 
       {learnMoreInfo ? (
-        <div className="bg-white bg-opacity-90 rounded-lg p-9 md:p-16 pt-10 z-60 relative w-3/4 max-h-[80vh] overflow-y-auto overflow-x-hidden transform transition-transform duration-300">
+        <div className="bg-white bg-opacity-90 rounded-lg p-9 md:p-16 pt-10 z-60 relative w-11/12 md:w-3/4 max-h-[80vh] overflow-y-auto overflow-x-hidden transform transition-transform duration-300">
           <button
             className="sticky top-4 -mr-7 float-right text-gray-600 hover:text-gray-800"
             onClick={onClose}

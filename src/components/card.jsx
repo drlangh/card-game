@@ -163,6 +163,7 @@ const CardScene = ({
         position: [0, 0, 5],
         fov: 50,
       }}
+      className="-mt-11 md:mt-0"
       style={{ width: '100%', height: '100%' }}
       onCreated={({ gl }) => {
         setCardReady(true);
