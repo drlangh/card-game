@@ -40,7 +40,7 @@ export default function CardClient() {
       >
         <IoMdArrowBack color="white" size={24} strokeWidth={20} />
       </Link>
-      <div className="w-full h-full flex items-center justify-between flex-col relative z-10 py-7 md:py-20 pointer-events-none">
+      <div className="w-full h-screen flex items-center justify-between flex-col relative z-10 py-7 md:py-20 pointer-events-none">
         <h1
           className="
           text-center
