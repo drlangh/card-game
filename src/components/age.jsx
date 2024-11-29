@@ -33,10 +33,10 @@ export default function Age({ setStep }) {
       >
         <IoMdArrowBack color="white" size={24} strokeWidth={20} />
       </Link>
-      <div className="w-auto flex items-center justify-center flex-col gap-10">
+      <div className="w-auto h-full flex items-center justify-center flex-col gap-10 ">
         <h1
           className="
-          text-5xl
+          text-4xl
           md:text-6xl
           font-bold
           pointer-events-auto

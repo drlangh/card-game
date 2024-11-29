@@ -19,7 +19,7 @@ export default function Welcome() {
         <MainButton>Get Started</MainButton>
       </Link>
 
-      <span className="w-auto text-white opacity-80 text-xs absolute bottom-5 left-1/2 transform -translate-x-1/2 p-2 flex flex-row items-center gap-1">
+      <span className="w-auto text-white opacity-80 text-xs absolute bottom-3 left-1/2 transform -translate-x-1/2 p-2 flex flex-row items-center gap-1">
         Powered by <GeminiLogo className="w-16 h-auto -mt-2" />
       </span>
     </div>

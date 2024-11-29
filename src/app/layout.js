@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${josefinSans.variable} ${poppins.className} antialiased`}
       >
-        <div className="flex items-center justify-center w-screen h-screen">
+        <div className="flex items-center justify-start w-screen min-h-dvh">
           {children}
           <div className="absolute top-6 right-6">
             <InfoIcon />
