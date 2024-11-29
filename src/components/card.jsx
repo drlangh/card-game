@@ -72,7 +72,7 @@ const Card = ({ cardData, rotating, category, isMobile }) => {
     if (isMobile) {
       cardRef.current.rotation.z = Math.PI / 2;
       svgRef.current.position.y = 1.8;
-      state.camera.position.z = 6.5;
+      state.camera.position.z = 8;
     } else {
       cardRef.current.rotation.z = 0;
       svgRef.current.position.y = 1.05;
@@ -104,7 +104,7 @@ const Card = ({ cardData, rotating, category, isMobile }) => {
         anchorX="center"
         fontWeight={500}
         anchorY="middle"
-        fontSize={isMobile ? 0.11 : 0.1}
+        fontSize={isMobile ? 0.16 : 0.1}
         maxWidth={isMobile ? 1.8 : 3.2}
       >
         {cardData}
