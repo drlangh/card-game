@@ -1,6 +1,6 @@
 'use client';
 
-import { getCard } from '@/api/gemini';
+const { getCard } = require('@/api/gemini');
 import { Card, MainButton } from '@/components';
 import useInformationStore from '@/stores/InformationStore';
 import Link from 'next/link';

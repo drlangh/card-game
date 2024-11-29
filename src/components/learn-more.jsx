@@ -4,7 +4,7 @@ import useInformationStore from '@/stores/InformationStore';
 import { useCallback, useEffect, useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 import { RxExternalLink } from 'react-icons/rx';
-import { getMoreInformation } from '@/api/gemini';
+const { getMoreInformation } = require('@/api/gemini');
 import ReactMarkdown from 'react-markdown';
 import { toast } from 'react-toastify';
 

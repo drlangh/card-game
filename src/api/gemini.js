@@ -1,5 +1,5 @@
-const { GoogleGenerativeAI } = require('@google/generative-ai');
-const promptConfig = require('@/json/prompt.json'); // Renamed to avoid shadowing
+import { GoogleGenerativeAI } from '@google/generative-ai';
+import promptConfig from '@/json/prompt.json'; // Renamed to avoid shadowing
 
 const maxTries = 3;
 const genAI = new GoogleGenerativeAI(
@@ -10,7 +10,7 @@ const model = genAI.getGenerativeModel({
   model: 'gemini-1.5-flash-8b',
 });
 
-export async function getCard(age, category) {
+async function getCard(age, category) {
   let cardData;
   const prompt1 = promptConfig.prompt1
     .replace(/{age}/g, age)
@@ -53,7 +53,7 @@ export async function getCard(age, category) {
   }
 }
 
-export async function getMoreInformation(content, age, category) {
+async function getMoreInformation(content, age, category) {
   let moreInformation;
   const prompt2 = promptConfig.prompt2
     .replace(/{age}/g, age)
@@ -82,3 +82,8 @@ export async function getMoreInformation(content, age, category) {
     }
   }
 }
+
+module.exports = {
+  getCard,
+  getMoreInformation,
+};
