@@ -2,16 +2,18 @@
 
 import { Age } from '@/components';
 import { Categories } from '@/components';
+import useInformationStore from '@/stores/InformationStore';
 import { useState, useEffect } from 'react';
 
 export default function ChoiceClient() {
   const [step, setStep] = useState(1);
+  const { age } = useInformationStore();
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const urlParams = new URLSearchParams(window.location.search);
       const step = urlParams.get('step');
-      if (step) {
+      if (step && step === '2' && age) {
         setStep(parseInt(step));
       }
     }

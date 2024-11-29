@@ -5,33 +5,37 @@ import { IoMdArrowBack } from 'react-icons/io';
 import useInformationStore from '@/stores/InformationStore';
 import { useState } from 'react';
 import { IoAlertCircleOutline } from 'react-icons/io5';
-import DummySVG from '@/../public/dummy.svg';
+import DefiningSVG from '@/../public/defining.svg';
+import ContextSVG from '@/../public/context.svg';
+import ReflectionsSVG from '@/../public/reflections.svg';
+import ToxicSVG from '@/../public/toxic.svg';
+import RoleSVG from '@/../public/role.svg';
 
 const categories = [
   {
-    svgComponent: DummySVG,
+    svgComponent: DefiningSVG,
     name: 'Defining Masculinity',
-    svgPath: '/dummy.svg',
+    svgPath: '/defining.svg',
   },
   {
-    svgComponent: DummySVG,
+    svgComponent: ToxicSVG,
     name: 'Toxic Masculinity',
-    svgPath: '/dummy.svg',
+    svgPath: '/toxic.svg',
   },
   {
-    svgComponent: DummySVG,
+    svgComponent: RoleSVG,
     name: 'The Role of Men and Boys',
-    svgPath: '/dummy.svg',
+    svgPath: '/role.svg',
   },
   {
-    svgComponent: DummySVG,
+    svgComponent: ContextSVG,
     name: 'Changing the Context',
-    svgPath: '/dummy.svg',
+    svgPath: '/context.svg',
   },
   {
-    svgComponent: DummySVG,
+    svgComponent: ReflectionsSVG,
     name: 'Personal Reflections',
-    svgPath: '/dummy.svg',
+    svgPath: '/reflections.svg',
   },
 ];
 

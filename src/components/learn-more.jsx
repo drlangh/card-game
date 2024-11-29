@@ -26,7 +26,7 @@ export default function LearnMorePopup({
     'Gathering insights...',
     'Fetching details...',
     'Compiling data...',
-    'Almost there...'
+    'Almost there...',
   ];
 
   const fetchMoreInformation = useCallback(async () => {
@@ -51,8 +51,10 @@ export default function LearnMorePopup({
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTextIndex((prevIndex) => (prevIndex + 1) % loadingTexts.length);
-    }, 1000);
+      setTextIndex(
+        (prevIndex) => (prevIndex + 1) % loadingTexts.length
+      );
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
@@ -80,7 +82,6 @@ export default function LearnMorePopup({
             Learn More
           </h2>
           <div className="text-gray-700 mb-6 prose prose-sm max-w-none">
-            {/* decrease the size of the line break */}
             <ReactMarkdown className="whitespace-pre-wrap">
               {learnMoreInfo}
             </ReactMarkdown>
@@ -101,7 +102,7 @@ export default function LearnMorePopup({
           </div>
         </div>
       ) : (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center relative z-50">
           <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-white"></div>
           <p className="text-white mt-4">{rotatingText}</p>
         </div>
