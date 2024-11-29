@@ -15,7 +15,6 @@ export default function CardClient() {
     'Click "Generate Card" to begin.'
   );
   const [rotating, setRotating] = useState(false);
-  const [link, setLink] = useState(null);
   const [status, setStatus] = useState(null);
   const [cardReady, setCardReady] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
@@ -81,7 +80,6 @@ export default function CardClient() {
                 onClick={async () => {
                   setRotating(true);
                   setCardData('');
-                  setLink(null);
                   setLearnMoreInfo(null);
                   await getCard(age, category).then((params) => {
                     if (!params) {
@@ -89,9 +87,8 @@ export default function CardClient() {
                       return;
                     }
 
-                    const { content, link, status } = params;
+                    const { content, status } = params;
                     setCardData(content);
-                    setLink(link);
                     setStatus(status);
                     setRotating(false);
                   });
@@ -108,7 +105,6 @@ export default function CardClient() {
       {showPopup && (
         <LearnMorePopup
           cardData={cardData}
-          link={link}
           onClose={() => setShowPopup(false)}
           learnMoreInfo={learnMoreInfo}
           setLearnMoreInfo={setLearnMoreInfo}

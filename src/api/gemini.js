@@ -62,7 +62,17 @@ export async function getMoreInformation(content, age, category) {
 
   for (let tries = 0; tries < maxTries; tries++) {
     try {
-      const completion = await model.generateContent(prompt2);
+      const completion = await model.generateContent([
+        {
+          fileData: {
+            mimeType: process.env.NEXT_PUBLIC_MIME_TYPE,
+            fileUri: process.env.NEXT_PUBLIC_FILE_URI,
+          },
+        },
+        {
+          text: prompt2,
+        },
+      ]);
       moreInformation = completion.response.text().trim();
 
       return moreInformation;
