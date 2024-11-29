@@ -8,9 +8,9 @@ const InfoIcon = () => {
   return (
     <div className="relative z-[10000]">
       <IoMdInformationCircleOutline
-        size={28}
+        size={24}
         color="#fff"
-        className="cursor-pointer"
+        className="cursor-pointer m-3"
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
       />
