@@ -2,6 +2,12 @@ import uploadFile from '@/api/file';
 import { CardClient } from '@/components';
 
 export default async function Cards() {
-  const fileUri = await uploadFile();
+  let fileUri = null;
+
+  if (!fileUri) {
+    console.log('called')
+    fileUri = await uploadFile();
+  }
+
   return <CardClient fileUri={fileUri} />;
 }
