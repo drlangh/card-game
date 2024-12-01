@@ -16,6 +16,7 @@ export default function LearnMorePopup({
   onClose,
   setLearnMoreInfo,
   learnMoreInfo,
+  fileUri,
 }) {
   const { age, category } = useInformationStore();
 
@@ -30,9 +31,14 @@ export default function LearnMorePopup({
   ];
 
   const fetchMoreInformation = useCallback(async () => {
-    const info = await getMoreInformation(cardData, age, category);
+    const info = await getMoreInformation(
+      cardData,
+      age,
+      category,
+      fileUri
+    );
 
-    if (info.includes('error')) {
+    if (info.toLowerCase().includes('error')) {
       toast.error(
         'Error generating more information. Please try again.'
       );

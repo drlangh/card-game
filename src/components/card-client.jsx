@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { IoMdArrowBack } from 'react-icons/io';
 import LearnMorePopup from './learn-more';
 
-export default function CardClient() {
+export default function CardClient({ fileUri }) {
   const { age, category } = useInformationStore();
   const [cardData, setCardData] = useState(
     'Click "Generate Card" to begin.'
@@ -108,6 +108,7 @@ export default function CardClient() {
           onClose={() => setShowPopup(false)}
           learnMoreInfo={learnMoreInfo}
           setLearnMoreInfo={setLearnMoreInfo}
+          fileUri={fileUri}
         />
       )}
     </>

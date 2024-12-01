@@ -2,8 +2,6 @@ const { GoogleGenerativeAI } = require('@google/generative-ai');
 const promptConfig = require('@/json/prompt.json'); // Renamed to avoid shadowing
 
 const MAX_TRIES = 3;
-const FILE_URI =
-  'https://generativelanguage.googleapis.com/v1beta/files/tuxt9yxica6c';
 const MIME_TYPE = 'application/pdf';
 
 const genAI = new GoogleGenerativeAI(
@@ -57,7 +55,12 @@ export async function getCard(age, category) {
   }
 }
 
-export async function getMoreInformation(content, age, category) {
+export async function getMoreInformation(
+  content,
+  age,
+  category,
+  fileUri
+) {
   let moreInformation;
   const prompt2 = promptConfig.prompt2
     .replace(/{age}/g, age)
@@ -70,7 +73,7 @@ export async function getMoreInformation(content, age, category) {
         {
           fileData: {
             mimeType: MIME_TYPE,
-            fileUri: FILE_URI,
+            fileUri: fileUri,
           },
         },
         {

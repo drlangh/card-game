@@ -117,16 +117,6 @@ const Card = ({ cardData, rotating, category, isMobile }) => {
         bevelSegments={0}
         creaseAngle={0.4}
       >
-        {/* <meshStandardMaterial
-          color="#cbc2d8"
-          roughness={0.9}
-          metalness={0.76}
-          roughnessMap={roughnessTexture}
-          normalMap={normalTexture}
-          normalScale={[0.15, 0.15]}
-          transparent={true}
-          opacity={0.4}
-        /> */}
         <meshPhysicalMaterial
           transmission={0.85}
           thickness={1.5}
@@ -136,7 +126,7 @@ const Card = ({ cardData, rotating, category, isMobile }) => {
           clearcoat={0.5}
           clearcoatRoughness={0.4}
           ior={1.45}
-          color={'#ebe8fd'}
+          color={'#eeedf8'}
           attenuationColor={'#ffffff'}
           attenuationDistance={1}
           opacity={0.9}

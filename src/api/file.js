@@ -20,10 +20,10 @@ export default async function uploadFile() {
     }
   );
 
-  // View the response.
-  console.log(
-    `Uploaded file ${uploadResponse.file.mimeType} as: ${uploadResponse.file.uri}`
-  );
+  // // View the response.
+  // console.log(
+  //   `Uploaded file ${uploadResponse.file.mimeType} as: ${uploadResponse.file.uri}`
+  // );
 
-  return uploadResponse.file;
+  return uploadResponse.file.uri;
 }
