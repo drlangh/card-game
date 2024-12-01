@@ -8,5 +8,5 @@ export default async function Cards() {
     fileUri = await uploadFile();
   }
 
-  return <CardClient fileUri={'as'} />;
+  return <CardClient fileUri={fileUri} />;
 }
