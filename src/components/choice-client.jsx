@@ -20,7 +20,7 @@ export default function ChoiceClient() {
   }, []);
 
   return (
-    <div className="w-full flex items-center justify-center flex-col h-screen">
+    <div className="w-full flex items-center justify-center flex-col min-h-screen">
       {step === 1 && <Age setStep={setStep} />}
       {step === 2 && <Categories setStep={setStep} />}
     </div>
