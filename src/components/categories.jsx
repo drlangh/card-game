@@ -55,7 +55,7 @@ export default function Categories({ setStep }) {
         <IoMdArrowBack color="white" size={24} strokeWidth={20} />
       </button>
 
-      <div className="w-full h-auto my-6 flex items-center justify-start flex-col text-white">
+      <div className="w-full h-auto flex items-center justify-start flex-col text-white">
         <h1 className="text-4xl w-2/3 md:w-auto md:text-6xl font-bold pointer-events-auto text-center">
           Select a category
         </h1>
