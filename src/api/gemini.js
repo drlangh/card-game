@@ -1,3 +1,4 @@
+'use server';
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const promptConfig = require('@/json/prompt.json'); // Renamed to avoid shadowing
 
