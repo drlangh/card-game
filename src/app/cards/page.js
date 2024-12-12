@@ -1,5 +1,7 @@
+import uploadFile from '@/api/file';
 import { CardClient } from '@/components';
 
-export default function Cards() {
-  return <CardClient />;
+export default async function Cards() {
+  const fileUri = await uploadFile();
+  return <CardClient fileUri={fileUri} />;
 }
