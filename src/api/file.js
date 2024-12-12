@@ -6,8 +6,7 @@ const fileManager = new GoogleAIFileManager(
   process.env.NEXT_PUBLIC_GEMINI_API_KEY
 );
 
-export default async function uploadFile() {
-  const timeOfUpload = new Date().toISOString();
+export default async function uploadFile(timeOfUpload) {
   // Upload the file and specify a display name.
   const uploadResponse = await fileManager.uploadFile(
     './R41_Shift_2020_Practitioners_Framework_Engaging_Male-Oriented_Settings.pdf',
