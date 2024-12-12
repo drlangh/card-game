@@ -1,16 +1,18 @@
 'use client';
 
+import uploadFile from '@/api/file';
 import { getCard } from '@/api/gemini';
 import { Card, MainButton } from '@/components';
 import useInformationStore from '@/stores/InformationStore';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IoMdArrowBack } from 'react-icons/io';
 import LearnMorePopup from './learn-more';
 
-export default function CardClient({ fileUri }) {
+export default function CardClient() {
   const { age, category } = useInformationStore();
+  const [fileUri, setFileUri] = useState(null);
   const [cardData, setCardData] = useState(
     'Click "Generate Card" to begin.'
   );
@@ -19,6 +21,15 @@ export default function CardClient({ fileUri }) {
   const [cardReady, setCardReady] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [learnMoreInfo, setLearnMoreInfo] = useState(null);
+
+  const getFileUri = async () => {
+    const file = await uploadFile();
+    setFileUri(file);
+  };
+
+  useEffect(() => {
+    getFileUri();
+  }, []);
 
   if (!age || !category) {
     redirect('/choice');
