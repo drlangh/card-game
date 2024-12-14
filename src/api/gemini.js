@@ -2,7 +2,6 @@ const { GoogleGenerativeAI } = require('@google/generative-ai');
 const promptConfig = require('@/json/prompt.json'); // Renamed to avoid shadowing
 
 const MAX_TRIES = 3;
-const MIME_TYPE = 'application/pdf';
 
 const genAI = new GoogleGenerativeAI(
   process.env.NEXT_PUBLIC_GEMINI_API_KEY
@@ -59,7 +58,7 @@ export async function getMoreInformation(
   content,
   age,
   category,
-  fileUri
+  file
 ) {
   let moreInformation;
   const prompt2 = promptConfig.prompt2
@@ -69,17 +68,7 @@ export async function getMoreInformation(
 
   for (let tries = 0; tries < MAX_TRIES; tries++) {
     try {
-      const completion = await model.generateContent([
-        {
-          fileData: {
-            mimeType: MIME_TYPE,
-            fileUri: fileUri,
-          },
-        },
-        {
-          text: prompt2,
-        },
-      ]);
+      const completion = await model.generateContent([prompt2, file]);
       moreInformation = completion.response.text().trim();
 
       return moreInformation;

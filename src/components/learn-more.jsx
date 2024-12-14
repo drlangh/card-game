@@ -16,7 +16,7 @@ export default function LearnMorePopup({
   onClose,
   setLearnMoreInfo,
   learnMoreInfo,
-  fileUri,
+  file,
 }) {
   const { age, category } = useInformationStore();
 
@@ -35,7 +35,7 @@ export default function LearnMorePopup({
       cardData,
       age,
       category,
-      fileUri
+      file
     );
 
     if (info.toLowerCase().includes('error')) {
