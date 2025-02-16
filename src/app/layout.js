@@ -1,12 +1,20 @@
 import './globals.css';
-import { Josefin_Sans, Poppins } from 'next/font/google';
+import { Roboto_Flex, Poppins, Updock } from 'next/font/google';
 import { ToastContainer } from 'react-toastify';
 import InfoIcon from '@/components/InfoIcon';
+import AnimatedContainer from '@/components/AnimatedContainer';
 
-const josefinSans = Josefin_Sans({
+const robotoFlex = Roboto_Flex({
   subsets: ['latin'],
-  display: 'swap',
-  variable: '--josefin-sans',
+  display: 'auto',
+  axes: ['wdth', 'XTRA', 'YTUC', 'GRAD'],
+  variable: '--roboto-flex',
+});
+
+const updock = Updock({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--updock',
 });
 
 const poppins = Poppins({
@@ -24,13 +32,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${josefinSans.variable} ${poppins.className} antialiased`}
+        className={`${robotoFlex.variable} ${poppins.className} ${updock.variable} antialiased`}
       >
-        <div className="flex items-center justify-start w-screen min-h-dvh pt-6 md:pt-0">
-          {children}
-          <div className="absolute top-6 right-6">
-            <InfoIcon />
+        <AnimatedContainer>
+          <div className="flex items-center justify-start w-screen min-h-dvh pt-6 md:pt-0">
+            {children}
           </div>
+        </AnimatedContainer>
+        <div className="absolute top-6 right-6">
+          <InfoIcon />
         </div>
         <ToastContainer />
       </body>

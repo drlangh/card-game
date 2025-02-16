@@ -1,12 +1,12 @@
 'use client';
 
-import { IoMdArrowBack } from 'react-icons/io';
-import { MainButton } from '.';
-import Link from 'next/link';
-import { RxCaretDown } from 'react-icons/rx';
 import useInformationStore from '@/stores/InformationStore';
+import Link from 'next/link';
 import { useState } from 'react';
+import { IoMdArrowBack } from 'react-icons/io';
 import { IoAlertCircleOutline } from 'react-icons/io5';
+import { RxCaretDown } from 'react-icons/rx';
+import { MainButton } from '.';
 
 const ageRanges = [
   { label: 'Under 17', value: 'Under 17' },
@@ -18,15 +18,15 @@ const ageRanges = [
   { label: '65 and over', value: '65 and over' },
 ];
 
-export default function Age({ setStep }) {
-  const { setAge, age, setCategory } = useInformationStore();
+export default function Age() {
+  const { setAge, age, category } = useInformationStore();
   const [missingAge, setMissingAge] = useState(false);
+
   return (
-    <>
+    <div className="w-full h-full justify-center items-center flex flex-col py-10 px-6 md:px-60 gap-4">
       <Link
-        href={'/'}
+        href={category ? '/category' : '/'}
         onClick={() => {
-          setCategory(null);
           setAge(null);
         }}
         className="pointer-events-auto absolute left-6 md:left-16 top-12 md:top-20 p-2 rounded-full border-2 border-transparent hover:border-white hover:shadow-[0px_0px_15px_3px_rgba(255,255,224,0.8)] transition-all duration-300"
@@ -34,15 +34,7 @@ export default function Age({ setStep }) {
         <IoMdArrowBack color="white" size={24} strokeWidth={20} />
       </Link>
       <div className="w-auto h-full flex items-center justify-center flex-col gap-10 ">
-        <h1
-          className="
-          text-4xl
-          md:text-6xl
-          font-bold
-          pointer-events-auto
-          text-white
-        "
-        >
+        <h1 className="text-4xl md:text-6xl font-bold pointer-events-auto text-white">
           Select your age
         </h1>
         <div className="text-[#5A5A7A] relative w-full">
@@ -78,18 +70,10 @@ export default function Age({ setStep }) {
           </span>
         )}
 
-        <MainButton
-          onClick={() => {
-            if (!age) {
-              setMissingAge(true);
-              return;
-            }
-            setStep((step) => step + 1);
-          }}
-        >
-          Next
-        </MainButton>
+        <Link href={category ? '/cards' : '/categories'}>
+          <MainButton>Next</MainButton>
+        </Link>
       </div>
-    </>
+    </div>
   );
 }

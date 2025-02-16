@@ -1,15 +1,15 @@
 'use client';
-import Link from 'next/link';
-import { MainButton } from '.';
-import { IoMdArrowBack } from 'react-icons/io';
+import ContextSVG from '@/../public/context.svg';
+import DefiningSVG from '@/../public/defining.svg';
+import ReflectionsSVG from '@/../public/reflections.svg';
+import RoleSVG from '@/../public/role.svg';
+import ToxicSVG from '@/../public/toxic.svg';
 import useInformationStore from '@/stores/InformationStore';
+import Link from 'next/link';
 import { useState } from 'react';
 import { IoAlertCircleOutline } from 'react-icons/io5';
-import DefiningSVG from '@/../public/defining.svg';
-import ContextSVG from '@/../public/context.svg';
-import ReflectionsSVG from '@/../public/reflections.svg';
-import ToxicSVG from '@/../public/toxic.svg';
-import RoleSVG from '@/../public/role.svg';
+import { MainButton } from '.';
+import { IoMdArrowBack } from 'react-icons/io';
 
 const categories = [
   {
@@ -39,74 +39,60 @@ const categories = [
   },
 ];
 
-export default function Categories({ setStep }) {
-  const { category, setCategory } = useInformationStore();
+export default function Categories() {
+  const { category, setCategory, age } = useInformationStore();
   const [missingCategory, setMissingCategory] = useState(false);
 
   return (
-    <>
-      <button
+    <div className="w-full h-full justify-center items-center text-white flex flex-col py-10 px-6 md:px-60 gap-4">
+      <Link
+        href={age ? '/age' : '/'}
         onClick={() => {
           setCategory(null);
-          setStep((step) => step - 1);
         }}
         className="pointer-events-auto absolute left-6 md:left-16 top-12 md:top-20 p-2 rounded-full border-2 border-transparent hover:border-white hover:shadow-[0px_0px_15px_3px_rgba(255,255,224,0.8)] transition-all duration-300"
       >
         <IoMdArrowBack color="white" size={24} strokeWidth={20} />
-      </button>
+      </Link>
+      <h1 className="text-4xl w-2/3 md:w-auto md:text-6xl font-bold pointer-events-auto text-center">
+        Select a category
+      </h1>
+      <div className="w-full px-3 flex flex-wrap gap-3 md:gap-5 mt-8 items-center justify-center">
+        {categories.map((cat, index) => {
+          const SVGComponent = cat.svgComponent;
 
-      <div className="w-full h-auto flex items-center justify-start flex-col text-white">
-        <h1 className="text-4xl w-2/3 md:w-auto md:text-6xl font-bold pointer-events-auto text-center">
-          Select a category
-        </h1>
-        <div className="w-full px-3 flex flex-wrap gap-3 md:gap-5 mt-8 items-center justify-center">
-          {categories.map((cat, index) => {
-            const SVGComponent = cat.svgComponent;
-
-            return (
-              <div
-                key={index}
-                onClick={() => {
-                  setCategory(cat);
-                  setMissingCategory(false);
-                }}
-                className={`text-[#5A5A7A] flex items-center bg-white justify-center flex-col h-36 w-36 p-4 cursor-pointer rounded-full transition-all duration-100 ${
-                  category && category.name === cat.name
-                    ? 'bg-opacity-80 text-[#4545c4] font-medium shadow-[0px_0px_15px_3px_#9a9cfe9e] scale-110'
-                    : 'bg-opacity-40'
-                }`}
-              >
-                {SVGComponent ? (
-                  <SVGComponent className="w-11 h-11 mb-2" />
-                ) : (
-                  <div className="w-11 h-11 mb-2 bg-gray-200 rounded-full animate-pulse" />
-                )}
-                <span className="text-center text-sm">
-                  {cat.name}
-                </span>
-              </div>
-            );
-          })}
-        </div>
-        {missingCategory && (
-          <span className="w-full items-center justify-center mt-4 flex flex-row gap-1 text-red-200 text-sm">
-            <IoAlertCircleOutline size={20} />
-            <p>Please select a category to continue</p>
-          </span>
-        )}
-        <Link
-          href={category ? '/cards' : '#'}
-          className="mt-8"
-          onClick={() => {
-            if (!category) {
-              setMissingCategory(true);
-              return;
-            }
-          }}
-        >
-          <MainButton>Next</MainButton>
-        </Link>
+          return (
+            <div
+              key={index}
+              onClick={() => {
+                setCategory(cat);
+                setMissingCategory(false);
+              }}
+              className={`text-[#5A5A7A] flex items-center bg-white justify-center flex-col h-36 w-36 p-4 cursor-pointer rounded-full transition-all duration-100 ${
+                category && category.name === cat.name
+                  ? 'bg-opacity-80 text-[#4545c4] font-medium shadow-[0px_0px_15px_3px_#9a9cfe9e] scale-110'
+                  : 'bg-opacity-40'
+              }`}
+            >
+              {SVGComponent ? (
+                <SVGComponent className="w-11 h-11 mb-2" />
+              ) : (
+                <div className="w-11 h-11 mb-2 bg-gray-200 rounded-full animate-pulse" />
+              )}
+              <span className="text-center text-sm">{cat.name}</span>
+            </div>
+          );
+        })}
       </div>
-    </>
+      {missingCategory && (
+        <span className="w-full items-center justify-center mt-4 flex flex-row gap-1 text-red-200 text-sm">
+          <IoAlertCircleOutline size={20} />
+          <p>Please select a category to continue</p>
+        </span>
+      )}
+      <Link href={age ? '/cards' : '/age'} className="mt-8">
+        <MainButton>Next</MainButton>
+      </Link>
+    </div>
   );
 }
