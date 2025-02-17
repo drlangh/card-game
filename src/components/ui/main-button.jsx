@@ -23,6 +23,7 @@ export default function MainButton({
   className,
   children,
   disabled,
+  onClick,
 }) {
   return (
     <button
@@ -31,6 +32,7 @@ export default function MainButton({
           disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none disabled:hover:border disabled:bg-transparent disabled:text-gray-200 
           `}
       disabled={disabled}
+      onClick={onClick}
     >
       <CustomLink
         href={href}

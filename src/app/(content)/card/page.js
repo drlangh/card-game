@@ -2,18 +2,23 @@ import { CardClient } from '@/components';
 import fs from 'fs';
 
 const filePath = 'file.pdf';
+let cachedFile = null;
 
-function fileToGenerativePart(path, mimeType) {
-  return {
-    inlineData: {
-      data: Buffer.from(fs.readFileSync(path)).toString('base64'),
-      mimeType,
-    },
-  };
+async function getFileData(filePath, mimeType) {
+  if (!cachedFile) {
+    const data = await fs.promises.readFile(filePath);
+    cachedFile = {
+      inlineData: {
+        data: Buffer.from(data).toString('base64'),
+        mimeType,
+      },
+    };
+  }
+  return cachedFile;
 }
 
 export default async function Cards() {
-  const file = fileToGenerativePart(filePath, 'application/pdf');
+  const file = await getFileData(filePath, 'application/pdf');
 
   return <CardClient file={file} />;
 }

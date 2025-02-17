@@ -58,9 +58,10 @@ export async function getMoreInformation(
   content,
   age,
   category,
-  file
+  file,
+  onChunk
 ) {
-  let moreInformation;
+  let moreInformation = '';
   const prompt2 = promptConfig.prompt2
     .replace(/{age}/g, age)
     .replace(/{category}/g, category.name)
@@ -68,10 +69,18 @@ export async function getMoreInformation(
 
   for (let tries = 0; tries < MAX_TRIES; tries++) {
     try {
-      const completion = await model.generateContent([prompt2, file]);
-      moreInformation = completion.response.text().trim();
-
-      return moreInformation;
+      const result = await model.generateContentStream([
+        prompt2,
+        file,
+      ]);
+      for await (const chunk of result.stream) {
+        const textChunk = chunk.text();
+        moreInformation += textChunk;
+        if (onChunk) {
+          onChunk(moreInformation);
+        }
+      }
+      return moreInformation.trim();
     } catch (error) {
       console.error('Error generating more information:', error);
 
@@ -80,7 +89,6 @@ export async function getMoreInformation(
           error instanceof SyntaxError
             ? 'Know more about this topic by visiting the link below.'
             : 'An error occurred while generating more information. Please try again.';
-
         return moreInformation;
       }
 
