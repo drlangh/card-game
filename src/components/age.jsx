@@ -6,10 +6,10 @@ import { useState } from 'react';
 import { IoMdArrowBack } from 'react-icons/io';
 import { IoAlertCircleOutline } from 'react-icons/io5';
 import { RxCaretDown } from 'react-icons/rx';
-import { MainButton } from '.';
+import { BackArrow, MainButton } from '.';
 
 const ageRanges = [
-  { label: 'Under 17', value: 'Under 17' },
+  { label: '17 and younger', value: '17 and younger' },
   { label: '18-24', value: '18-24' },
   { label: '25-34', value: '25-34' },
   { label: '35-44', value: '35-44' },
@@ -24,23 +24,28 @@ export default function Age() {
 
   return (
     <div className="w-full h-full justify-center items-center flex flex-col py-10 px-6 md:px-60 gap-4">
-      <Link
+      <BackArrow
         href={category ? '/category' : '/'}
         onClick={() => {
           setAge(null);
         }}
-        className="pointer-events-auto absolute left-6 md:left-16 top-12 md:top-20 p-2 rounded-full border-2 border-transparent hover:border-white hover:shadow-[0px_0px_15px_3px_rgba(255,255,224,0.8)] transition-all duration-300"
-      >
-        <IoMdArrowBack color="white" size={24} strokeWidth={20} />
-      </Link>
-      <div className="w-auto h-full flex items-center justify-center flex-col gap-10 ">
-        <h1 className="text-4xl md:text-6xl font-bold pointer-events-auto text-white">
-          Select your age
+      />
+      <div className="w-auto h-full flex items-center justify-center flex-col gap-6 max-w-2xl">
+        <h1 className="wide-text text-left text-4xl md:text-[3.3rem] leading-[4rem]">
+          Which{' '}
+          <span className="special normal-case text-[5.3rem]">
+            age range{' '}
+          </span>{' '}
+          do you fall into?
         </h1>
-        <div className="text-[#5A5A7A] relative w-full">
+        <p className="text-base md:text-lg opacity-80 text-left w-full">
+          We use your age range to tailor our content and ensure it’s
+          relevant to you.
+        </p>
+        <div className="text-[#6161a6] relative w-full">
           <select
             defaultValue={age || ''}
-            className={`w-full bg-white bg-opacity-50 rounded-full px-4 py-2 focus:bg-opacity-70 ${
+            className={`w-full bg-white bg-opacity-70 rounded-full px-4 py-2 hover:bg-opacity-100 focus:bg-opacity-100 ${
               missingAge ? 'border border-red-200' : 'border-0'
             }`}
             onChange={(e) => {
@@ -49,7 +54,7 @@ export default function Age() {
             }}
           >
             <option value="" disabled>
-              Select your age
+              Select your age range
             </option>
             {ageRanges.map((ageRange) => (
               <option key={ageRange.value} value={ageRange.value}>
@@ -70,9 +75,12 @@ export default function Age() {
           </span>
         )}
 
-        <Link href={category ? '/cards' : '/categories'}>
-          <MainButton>Next</MainButton>
-        </Link>
+        <MainButton
+          href={category ? '/card' : '/categories'}
+          disabled={!age}
+        >
+          Next
+        </MainButton>
       </div>
     </div>
   );

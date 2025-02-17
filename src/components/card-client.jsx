@@ -1,45 +1,28 @@
 'use client';
 
 import { getCard } from '@/api/gemini';
-import { Card, MainButton } from '@/components';
+import { BackArrow, MainButton } from '@/components';
+import useCardStore from '@/stores/cardStore';
 import useInformationStore from '@/stores/InformationStore';
-import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { useState } from 'react';
-import { IoMdArrowBack } from 'react-icons/io';
 import LearnMorePopup from './learn-more';
 
 export default function CardClient({ file }) {
   const { age, category } = useInformationStore();
-  const [cardData, setCardData] = useState(
-    'Click "Generate Card" to begin.'
-  );
+  const { cardReady, setCardData } = useCardStore();
   const [rotating, setRotating] = useState(false);
   const [status, setStatus] = useState(null);
-  const [cardReady, setCardReady] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [learnMoreInfo, setLearnMoreInfo] = useState(null);
 
   if (!age || !category) {
-    redirect('/choice');
+    redirect('/categories');
   }
 
   return (
     <>
-      <div className="w-full h-screen absolute z-0">
-        <Card
-          cardData={cardData}
-          rotating={rotating}
-          category={category}
-          setCardReady={setCardReady}
-        />
-      </div>
-      <Link
-        href={'/choice?step=2'}
-        className="pointer-events-auto z-30 absolute left-6 md:left-16 top-12 md:top-20 p-2 rounded-full border-2 border-transparent hover:border-white hover:shadow-[0px_0px_15px_3px_rgba(255,255,224,0.8)] transition-all duration-300"
-      >
-        <IoMdArrowBack color="white" size={24} strokeWidth={20} />
-      </Link>
+      <BackArrow href={'/categories'} />
       <div className="w-full h-screen flex items-center justify-between flex-col relative z-10 py-7 md:py-20 pointer-events-none">
         <h1
           className="

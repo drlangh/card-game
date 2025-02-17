@@ -7,7 +7,7 @@ import AnimatedContainer from '@/components/AnimatedContainer';
 const robotoFlex = Roboto_Flex({
   subsets: ['latin'],
   display: 'auto',
-  axes: ['wdth', 'XTRA', 'YTUC', 'GRAD'],
+  axes: ['wdth', 'XTRA', 'YTUC', 'GRAD', 'YTDE'],
   variable: '--roboto-flex',
 });
 

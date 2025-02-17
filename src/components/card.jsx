@@ -11,6 +11,8 @@ import {
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import useCardStore from '@/stores/cardStore';
+import useInformationStore from '@/stores/InformationStore';
 
 const createNoiseTexture = (intensity = 1) => {
   const size = 256;
@@ -93,7 +95,7 @@ const Card = ({ cardData, rotating, category, isMobile }) => {
       <Svg
         ref={svgRef}
         position={cardData ? [-0.14, 1.05, 0.02] : [-0.14, 0.2, 0.02]}
-        src={category.svgPath}
+        src={category?.svgPath || ''}
         scale={0.012}
         color="#58589d"
       />
@@ -139,13 +141,10 @@ const Card = ({ cardData, rotating, category, isMobile }) => {
   );
 };
 
-const CardScene = ({
-  cardData,
-  rotating,
-  category,
-  setCardReady,
-}) => {
+export default function CardScene() {
   const isMobile = useIsMobile();
+  const { category } = useInformationStore();
+  const { rotating, setCardReady, cardData } = useCardStore();
 
   return (
     <Canvas
@@ -199,6 +198,4 @@ const CardScene = ({
       />
     </Canvas>
   );
-};
-
-export default CardScene;
+}
