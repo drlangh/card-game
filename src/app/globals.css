@@ -24,6 +24,10 @@ h6 {
     'GRAD' 120,
     'YTDE' -220,
     'YTUC' 660;
+
+  @media (max-width: 768px) {
+    line-height: 3rem;
+  }
 }
 
 .special {
@@ -56,37 +60,37 @@ body:before {
 
   background-image: radial-gradient(
       at 97% 6%,
-      hsla(5, 37%, 74%, 0.7) 0px,
+      hsla(5, 37%, 64%, 0.7) 0px,
       transparent 50%
     ),
     radial-gradient(
       at 6% 11%,
-      hsla(353, 30%, 71%, 0.8) 0px,
+      hsla(353, 30%, 61%, 0.8) 0px,
       transparent 50%
     ),
     radial-gradient(
       at 6% 53%,
-      hsla(278, 56%, 64%, 1) 0px,
+      hsla(278, 56%, 44%, 1) 0px,
       transparent 50%
     ),
     radial-gradient(
       at 95% 91%,
-      hsla(209, 55%, 64%, 1) 0px,
+      hsla(209, 55%, 44%, 1) 0px,
       transparent 50%
     ),
     radial-gradient(
       at 5% 91%,
-      hsla(334, 70%, 75%, 1) 0px,
+      hsla(334, 70%, 55%, 1) 0px,
       transparent 50%
     ),
     radial-gradient(
       at 50% 34%,
-      hsla(32, 28%, 91%, 0.5) 0px,
+      hsla(32, 28%, 81%, 0.5) 0px,
       transparent 50%
     ),
     radial-gradient(
       at 87% 72%,
-      hsla(198, 25%, 77%, 1) 0px,
+      hsla(198, 25%, 67%, 1) 0px,
       transparent 50%
     );
 }

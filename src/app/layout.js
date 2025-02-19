@@ -1,5 +1,5 @@
 import './globals.css';
-import { Roboto_Flex, Poppins, Updock } from 'next/font/google';
+import { Roboto_Flex, Poppins, Handlee } from 'next/font/google';
 import { ToastContainer } from 'react-toastify';
 import InfoIcon from '@/components/InfoIcon';
 import AnimatedContainer from '@/components/AnimatedContainer';
@@ -11,7 +11,7 @@ const robotoFlex = Roboto_Flex({
   variable: '--roboto-flex',
 });
 
-const updock = Updock({
+const updock = Handlee({
   subsets: ['latin'],
   weight: '400',
   variable: '--updock',

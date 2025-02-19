@@ -126,7 +126,7 @@ const Card = ({ cardData, rotating, category, isMobile }) => {
           clearcoat={0.5}
           clearcoatRoughness={0.4}
           ior={1.45}
-          color={'#eeedf8'}
+          color={'#ffffff'}
           attenuationColor={'#ffffff'}
           attenuationDistance={1}
           opacity={0.9}
