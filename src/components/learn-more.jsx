@@ -8,6 +8,7 @@ import { getMoreInformation } from '@/api/gemini';
 import ReactMarkdown from 'react-markdown';
 import { toast } from 'react-toastify';
 import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 
 const LINK =
   'https://prism.ucalgary.ca/server/api/core/bitstreams/f6a4c80d-ed62-4d95-af18-af5dd3207a82/content';
@@ -34,13 +35,13 @@ export default function LearnMorePopup({
 
   const fetchMoreInformation = useCallback(async () => {
     try {
-      await getMoreInformation(
+      const content = await getMoreInformation(
         cardData,
         age,
         category,
-        file,
-        (partialInfo) => setLearnMoreInfo(partialInfo)
+        file
       );
+      setLearnMoreInfo(content);
     } catch (error) {
       toast.error(
         'Error generating more information. Please try again.'
@@ -87,75 +88,121 @@ export default function LearnMorePopup({
             damping: 25,
             stiffness: 200,
           }}
+          onClick={onClose}
           className="fixed top-0 left-0 right-0 w-full h-full bg-black/45 z-50 overflow-hidden"
         >
           <motion.div
             initial={{
               y: '100%',
-              filter: 'blur(8px)',
-              borderRadius: '0px',
             }}
             animate={{
               y: '10%',
-              filter: 'blur(0px)',
-              borderRadius: '24px',
             }}
             exit={{
               y: '100%',
-              filter: 'blur(8px)',
-              borderRadius: '0px',
             }}
             transition={{
               type: 'spring',
               damping: 25,
               stiffness: 200,
             }}
-            className="relative bottom-0 left-0 right-0 w-full h-[100vh] bg-[#babcda] 
-                     overflow-y-auto overflow-x-hidden shadow-2xl p-9 md:p-20"
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+            className="relative bottom-0 left-0 right-0 w-full h-[100vh] text-[#2D2D53] bg-[#babcda] 
+                     overflow-y-auto overflow-x-hidden shadow-2xl p-9 md:px-20 md:py-10 rounded-3xl"
           >
             <button
-              className="sticky top-4 -mr-7 float-right text-[#58589d]"
+              className="sticky top-4 -mr-7 float-right "
               onClick={onClose}
             >
               <IoClose size={24} />
             </button>
-            {learnMoreInfo ? (
-              <div className="text-[#58589d]">
-                <h2 className="wide-text text-left clear-right text-3xl w-7/12 md:text-6xl">
-                  Learn More
-                </h2>
+            <h2 className="wide-text text-left clear-right text-3xl w-7/12 md:text-5xl">
+              Learn More of this Card
+            </h2>
 
-                <div className="p-6 bg-violet-200 rounded-2xl my-10 text-base md:text-lg">
-                  {cardData}
-                </div>
-
-                <div className="mb-6 prose prose-sm max-w-none text-base md:text-lg">
-                  <ReactMarkdown className="whitespace-pre-wrap">
-                    {learnMoreInfo}
-                  </ReactMarkdown>
-                </div>
-
-                <div className="text-center mb-14">
-                  <a
+            <div className="p-6 bg-violet-200 rounded-2xl my-10 text-base md:text-lg">
+              {cardData}
+            </div>
+            <AnimatePresence mode="wait">
+              {learnMoreInfo ? (
+                <motion.div
+                  key="content"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.5 }}
+                  className="mb-24"
+                >
+                  <div className="mb-10 prose prose-sm max-w-none text-base md:text-lg">
+                    <ReactMarkdown className="whitespace-pre-wrap">
+                      {learnMoreInfo}
+                    </ReactMarkdown>
+                  </div>
+                  <Link
                     href={LINK}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-blue-600 bg-opacity-60 hover:bg-opacity-80 text-white py-2 px-6 rounded-full transition-all duration-300"
+                    className="hover:underline hover:opacity-70 text-base md:text-lg"
                   >
                     <RxExternalLink
                       size={20}
                       className="inline-block -mt-1 mr-2"
                     />
-                    Visit Resource
-                  </a>
-                </div>
-              </div>
-            ) : (
-              <div className="flex flex-col items-center justify-center h-full">
-                <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-[#58589d]"></div>
-                <p className="text-[#58589d] mt-4">{rotatingText}</p>
-              </div>
-            )}
+                    Dozois, E., & Wells, L. (2020). Changing contexts:
+                    A framework for engaging male-oriented settings in
+                    gender equality and violence prevention –
+                    Practitioners’ guide. Calgary, AB: The University
+                    of Calgary, Shift: The Project to End Domestic
+                    Violence.
+                  </Link>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="skeleton"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.5 }}
+                  className=" animate-pulse"
+                >
+                  <div className="mb-10 space-y-4">
+                    <div className="relative h-4 bg-[#2D2D53]/50 rounded w-full overflow-hidden">
+                      <div className="absolute inset-0 shimmer" />
+                    </div>
+                    <div className="relative h-4 bg-[#2D2D53]/50 rounded w-11/12 overflow-hidden">
+                      <div className="absolute inset-0 shimmer" />
+                    </div>
+                    <div className="relative h-4 bg-[#2D2D53]/50 rounded w-10/12 overflow-hidden">
+                      <div className="absolute inset-0 shimmer" />
+                    </div>
+                    <div className="relative h-4 bg-[#2D2D53]/50 rounded w-full overflow-hidden">
+                      <div className="absolute inset-0 shimmer" />
+                    </div>
+                    <div className="relative h-4 bg-[#2D2D53]/50 rounded w-9/12 overflow-hidden">
+                      <div className="absolute inset-0 shimmer" />
+                    </div>
+                  </div>
+
+                  <div className="mb-10 space-y-4">
+                    <div className="relative h-4 bg-[#2D2D53]/50 rounded w-full overflow-hidden">
+                      <div className="absolute inset-0 shimmer" />
+                    </div>
+                    <div className="relative h-4 bg-[#2D2D53]/50 rounded w-11/12 overflow-hidden">
+                      <div className="absolute inset-0 shimmer" />
+                    </div>
+                    <div className="relative h-4 bg-[#2D2D53]/50 rounded w-10/12 overflow-hidden">
+                      <div className="absolute inset-0 shimmer" />
+                    </div>
+                  </div>
+
+                  <div className="relative mb-10 h-20 bg-[#2D2D53]/50 rounded overflow-hidden">
+                    <div className="absolute inset-0 shimmer" />
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
         </motion.div>
       )}

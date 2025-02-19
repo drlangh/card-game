@@ -32,11 +32,7 @@ export default function Age() {
       />
       <div className="w-auto h-full flex items-center justify-center flex-col gap-6 max-w-2xl">
         <h1 className="wide-text text-left text-4xl md:text-[3.3rem] leading-[4rem]">
-          Which{' '}
-          <span className="special normal-case text-[5.3rem]">
-            age range{' '}
-          </span>{' '}
-          do you fall into?
+          Which age range do you fall into?
         </h1>
         <p className="text-base md:text-lg opacity-80 text-left w-full">
           We use your age range to tailor our content and ensure it’s

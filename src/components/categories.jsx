@@ -1,12 +1,11 @@
 'use client';
+
 import ContextSVG from '@/../public/context.svg';
 import DefiningSVG from '@/../public/defining.svg';
 import ReflectionsSVG from '@/../public/reflections.svg';
 import RoleSVG from '@/../public/role.svg';
 import ToxicSVG from '@/../public/toxic.svg';
 import useInformationStore from '@/stores/InformationStore';
-import { useState } from 'react';
-import { IoAlertCircleOutline } from 'react-icons/io5';
 import { BackArrow, MainButton } from '.';
 
 const categories = [
@@ -39,7 +38,6 @@ const categories = [
 
 export default function Categories() {
   const { category, setCategory, age } = useInformationStore();
-  const [missingCategory, setMissingCategory] = useState(false);
 
   return (
     <div className="w-full h-full justify-center items-center flex flex-col py-10 px-6 md:px-60 gap-4">
@@ -51,17 +49,13 @@ export default function Categories() {
       />
       <div className="w-auto h-full flex items-center justify-center flex-col gap-6 max-w-[50rem]">
         <h1 className="wide-text text-left text-4xl md:text-[3.3rem] leading-[4rem]">
-          Which{' '}
-          <span className="special normal-case text-[5.3rem]">
-            category
-          </span>{' '}
-          resonates with you?
+          Which category resonates with you?
         </h1>
         <p className="text-base md:text-lg opacity-80 text-left w-full">
           Pick a category to explore different perspectives on
           masculinity.
         </p>
-        <div className="w-full flex flex-wrap items-center justify-between">
+        <div className="w-full flex flex-wrap items-center justify-between mb-8">
           {categories.map((cat, index) => {
             const SVGComponent = cat.svgComponent;
 
@@ -70,7 +64,6 @@ export default function Categories() {
                 key={index}
                 onClick={() => {
                   setCategory(cat);
-                  setMissingCategory(false);
                 }}
                 className={`text-[#6161a6] bg-white flex items-center justify-center flex-col size-[9rem] p-4 rounded-3xl transition-all duration-100 ${
                   category && category.name === cat.name
@@ -86,15 +79,9 @@ export default function Categories() {
             );
           })}
         </div>
-        {missingCategory && (
-          <span className="w-full items-center justify-center mt-4 flex flex-row gap-1 text-red-200 text-sm ">
-            <IoAlertCircleOutline size={20} />
-            <p>Please select a category to continue</p>
-          </span>
-        )}
+
         <MainButton
           href={age ? '/card' : '/age'}
-          linkClassName={'mt-8'}
           disabled={!category}
         >
           Next

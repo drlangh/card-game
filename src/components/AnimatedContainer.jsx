@@ -26,7 +26,7 @@ export default function AnimatedContainer({ children }) {
       <AnimatePresence mode={'wait'} initial={false}>
         <motion.div
           key={pathname}
-          className="z-10 relative"
+          className="z-10 relative transform-gpu"
           initial={{
             opacity: 0,
             y: '5%',

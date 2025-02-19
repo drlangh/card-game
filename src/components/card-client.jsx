@@ -5,7 +5,6 @@ import { BackArrow, Card, MainButton } from '@/components';
 import useInformationStore from '@/stores/InformationStore';
 import { redirect } from 'next/navigation';
 import { useState } from 'react';
-import { IoMdArrowBack } from 'react-icons/io';
 import LearnMorePopup from './learn-more';
 
 export default function CardClient({ file }) {
@@ -13,8 +12,8 @@ export default function CardClient({ file }) {
   const [cardData, setCardData] = useState(
     'Click "Generate Card" to begin.'
   );
+  const [generated, setGenerated] = useState(false);
   const [rotating, setRotating] = useState(false);
-  const [status, setStatus] = useState(null);
   const [cardReady, setCardReady] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [learnMoreInfo, setLearnMoreInfo] = useState(null);
@@ -63,22 +62,21 @@ export default function CardClient({ file }) {
                   setRotating(true);
                   setCardData('');
                   setLearnMoreInfo(null);
-                  await getCard(age, category).then((params) => {
-                    if (!params) {
+                  await getCard(age, category).then((content) => {
+                    if (!content) {
                       setRotating(false);
                       return;
                     }
 
-                    const { content, status } = params;
                     setCardData(content);
-                    setStatus(status);
+                    setGenerated(true);
                     setRotating(false);
                   });
                 }}
               >
                 Generate Card
               </MainButton>
-              {status === 200 && (
+              {generated && (
                 <button
                   onClick={() => setShowPopup(true)}
                   className="pointer-events-auto text-white flex flex-row items-center gap-2 rounded-full py-3 px-9 hover:underline"

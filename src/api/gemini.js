@@ -6,7 +6,7 @@ const MAX_TRIES = 3;
 const genAI = new GoogleGenerativeAI(
   process.env.NEXT_PUBLIC_GEMINI_API_KEY
 );
-// models available: 'gemini-1.5-pro', 'gemini-1.5-flash-8b', 'gemini-1.5-flash', 'aqa'
+// models available: 'gemini-1.5-pro', 'gemini-1.5-flash-8b', 'gemini-1.5-flash', 'gemini-2.0-flash'
 const model = genAI.getGenerativeModel({
   model: 'gemini-1.5-flash-8b',
 });
@@ -20,32 +20,18 @@ export async function getCard(age, category) {
   for (let tries = 0; tries < MAX_TRIES; tries++) {
     try {
       const completion = await model.generateContent(prompt1);
-      const assistantReply = completion.response.text().trim();
+      cardData = completion.response.text().trim();
 
-      const validJsonString = assistantReply
-        .replace(/,\s*}/g, '}')
-        .replace(/,\s*]/g, ']');
-
-      const result =
-        validJsonString.slice(0, -1) + ', "status": 200 }';
-
-      cardData = JSON.parse(result);
       return cardData;
     } catch (error) {
       console.error('Error generating card:', error);
 
       if (tries === MAX_TRIES - 1) {
-        cardData = {
-          content:
-            error instanceof SyntaxError
-              ? 'Everyone deserves to feel safe and respected. Learn how you can help.'
-              : 'An error occurred while generating the card. Please try again.',
-          link:
-            error instanceof SyntaxError
-              ? 'https://www.thehotline.org/'
-              : '#',
-          status: 500,
-        };
+        cardData =
+          error instanceof SyntaxError
+            ? 'Everyone deserves to feel safe and respected. Learn how you can help.'
+            : 'An error occurred while generating the card. Please try again.';
+
         return cardData;
       }
 
@@ -58,10 +44,9 @@ export async function getMoreInformation(
   content,
   age,
   category,
-  file,
-  onChunk
+  file
 ) {
-  let moreInformation = '';
+  let moreInformation;
   const prompt2 = promptConfig.prompt2
     .replace(/{age}/g, age)
     .replace(/{category}/g, category.name)
@@ -69,18 +54,10 @@ export async function getMoreInformation(
 
   for (let tries = 0; tries < MAX_TRIES; tries++) {
     try {
-      const result = await model.generateContentStream([
-        prompt2,
-        file,
-      ]);
-      for await (const chunk of result.stream) {
-        const textChunk = chunk.text();
-        moreInformation += textChunk;
-        if (onChunk) {
-          onChunk(moreInformation);
-        }
-      }
-      return moreInformation.trim();
+      const completion = await model.generateContent([prompt2, file]);
+      moreInformation = completion.response.text().trim();
+
+      return moreInformation;
     } catch (error) {
       console.error('Error generating more information:', error);
 
@@ -89,6 +66,7 @@ export async function getMoreInformation(
           error instanceof SyntaxError
             ? 'Know more about this topic by visiting the link below.'
             : 'An error occurred while generating more information. Please try again.';
+
         return moreInformation;
       }
 

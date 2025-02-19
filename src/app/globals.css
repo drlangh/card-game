@@ -28,7 +28,6 @@ h6 {
 
 .special {
   font-family: var(--updock) !important;
-  font-style: italic;
 }
 
 @keyframes moveGradient {
@@ -113,4 +112,36 @@ select {
 select:focus {
   outline: none;
   border: none;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(185, 188, 218, 0.592) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 3s infinite linear;
+}
+
+ol,
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+li {
+  display: flex;
+  flex-direction: column;
 }
