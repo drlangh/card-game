@@ -39,9 +39,7 @@ export default function CardClient({ file }) {
         </h1>
         <div
           className={`w-10/12 gap-6 mb-14 lg:w-1/3 md:mb-4 flex flex-row items-center ${
-            !rotating && status === 200
-              ? 'justify-between'
-              : 'justify-center'
+            !rotating ? 'justify-between' : 'justify-center'
           }`}
         >
           {!rotating ? (
