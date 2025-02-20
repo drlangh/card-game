@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="431" height="431"><svg width="431" height="431" viewBox="0 0 431 431" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="431" height="431" rx="12" fill="url(#paint0_linear_4_53)"></rect>
+<path d="M215.5 360.083C295.351 360.083 360.083 295.351 360.083 215.5C360.083 135.649 295.351 70.9167 215.5 70.9167C135.649 70.9167 70.9166 135.649 70.9166 215.5C70.9166 295.351 135.649 360.083 215.5 360.083Z" stroke="white" stroke-width="28.9167" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M215.5 302.25C263.411 302.25 302.25 263.411 302.25 215.5C302.25 167.589 263.411 128.75 215.5 128.75C167.589 128.75 128.75 167.589 128.75 215.5C128.75 263.411 167.589 302.25 215.5 302.25Z" stroke="white" stroke-width="28.9167" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M215.5 244.417C231.47 244.417 244.417 231.47 244.417 215.5C244.417 199.53 231.47 186.583 215.5 186.583C199.53 186.583 186.583 199.53 186.583 215.5C186.583 231.47 199.53 244.417 215.5 244.417Z" stroke="white" stroke-width="28.9167" stroke-linecap="round" stroke-linejoin="round"></path>
+<defs>
+<linearGradient id="SvgjsLinearGradient1037" x1="431" y1="0" x2="0" y2="431" gradientUnits="userSpaceOnUse">
+<stop stop-color="#3272AE"></stop>
+<stop offset="1" stop-color="#8D4AA1"></stop>
+</linearGradient>
+</defs>
+</svg><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
+@media (prefers-color-scheme: dark) { :root { filter: none; } }
+</style></svg>
