@@ -46,7 +46,6 @@ export async function getMoreInformation(
   category,
   file
 ) {
-  let moreInformation;
   const prompt2 = promptConfig.prompt2
     .replace(/{age}/g, age)
     .replace(/{category}/g, category.name)
@@ -55,19 +54,14 @@ export async function getMoreInformation(
   for (let tries = 0; tries < MAX_TRIES; tries++) {
     try {
       const completion = await model.generateContent([prompt2, file]);
-      moreInformation = completion.response.text().trim();
-
-      return moreInformation;
+      return completion.response.text().trim();
     } catch (error) {
       console.error('Error generating more information:', error);
 
       if (tries === MAX_TRIES - 1) {
-        moreInformation =
-          error instanceof SyntaxError
-            ? 'Know more about this topic by visiting the link below.'
-            : 'An error occurred while generating more information. Please try again.';
-
-        return moreInformation;
+        return error instanceof SyntaxError
+          ? 'Know more about this topic by visiting the link below.'
+          : 'An error occurred while generating more information. Please try again.';
       }
 
       await new Promise((res) => setTimeout(res, 1000));
