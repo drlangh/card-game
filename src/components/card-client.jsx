@@ -1,22 +1,24 @@
 'use client';
 
 import { getCard } from '@/api/gemini';
-import { BackArrow, Card, MainButton } from '@/components';
+import { BackArrow, MainButton } from '@/components';
+import useCardStore from '@/stores/cardStore';
 import useInformationStore from '@/stores/InformationStore';
 import { redirect } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import LearnMorePopup from './learn-more';
 
 export default function CardClient({ file }) {
   const { age, category } = useInformationStore();
-  const [cardData, setCardData] = useState(
-    'Click "Generate Card" to begin.'
-  );
+  const { cardReady, rotating, cardData, setCardData, setRotating } =
+    useCardStore();
   const [generated, setGenerated] = useState(false);
-  const [rotating, setRotating] = useState(false);
-  const [cardReady, setCardReady] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [learnMoreInfo, setLearnMoreInfo] = useState(null);
+
+  useEffect(() => {
+    setCardData('Click "Generate Card" to begin.');
+  }, []);
 
   if (!age || !category) {
     redirect('/categories');
@@ -24,23 +26,13 @@ export default function CardClient({ file }) {
 
   return (
     <>
-      <div
-        className={`w-full h-full absolute overflow-hidden ${showPopup ? 'z-50' : 'z-0'}`}
-      >
-        <Card
-          cardData={cardData}
-          rotating={rotating}
-          category={category}
-          setCardReady={setCardReady}
-        />
-      </div>
       <BackArrow href={'/categories'} />
       <div
         className={
-          'w-full h-screen flex items-center justify-between flex-col relative z-10 py-7 md:py-20 pointer-events-none'
+          'w-full h-screen flex items-center justify-between flex-col relative z-10 py-10 md:py-20 pointer-events-none'
         }
       >
-        <h1 className="wide-text text-center text-3xl w-7/12 md:text-4xl leading-[2rem]">
+        <h1 className="wide-text text-center text-3xl w-7/12 md:text-4xl !leading-9">
           {category && category.name}
         </h1>
         <div

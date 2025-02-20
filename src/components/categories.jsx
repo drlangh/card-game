@@ -21,7 +21,7 @@ const categories = [
   },
   {
     svgComponent: RoleSVG,
-    name: 'The Role of Men and Boys',
+    name: 'The Role of Men',
     svgPath: '/role.svg',
   },
   {
@@ -55,29 +55,51 @@ export default function Categories() {
           Pick a category to explore different perspectives on
           masculinity.
         </p>
-        <div className="w-full flex flex-wrap items-center justify-between mb-8">
-          {categories.map((cat, index) => {
+        <div className="w-full grid grid-cols-3 gap-4 auto-rows-auto justify-center md:flex md:flex-wrap items-center md:justify-between mb-8">
+          {categories.slice(0, 3).map((cat, index) => {
             const SVGComponent = cat.svgComponent;
-
             return (
               <button
                 key={index}
                 onClick={() => {
                   setCategory(cat);
                 }}
-                className={`text-[#6161a6] bg-white flex items-center justify-center flex-col size-[9rem] p-4 rounded-3xl transition-all duration-100 ${
+                className={`text-[#6161a6] bg-white flex flex-col items-center justify-center size-[7rem] md:size-[9rem] p-4 rounded-3xl transition-all duration-100 ${
                   category && category.name === cat.name
                     ? 'bg-opacity-100 text-[#4545c4] font-medium shadow-[0px_0px_15px_3px_#9a9cfe9e] scale-105'
                     : 'bg-opacity-60 hover:bg-opacity-90'
                 }`}
               >
                 <SVGComponent className="size-12 mb-3" />
-                <span className="text-center text-sm">
+                <span className="text-center text-xs md:text-sm">
                   {cat.name}
                 </span>
               </button>
             );
           })}
+          <div className="col-span-3 flex justify-center gap-4">
+            {categories.slice(3).map((cat, index) => {
+              const SVGComponent = cat.svgComponent;
+              return (
+                <button
+                  key={index}
+                  onClick={() => {
+                    setCategory(cat);
+                  }}
+                  className={`text-[#6161a6] bg-white flex flex-col items-center justify-center size-[7rem] md:size-[9rem] p-4 rounded-3xl transition-all duration-100 ${
+                    category && category.name === cat.name
+                      ? 'bg-opacity-100 text-[#4545c4] font-medium shadow-[0px_0px_15px_3px_#9a9cfe9e] scale-105'
+                      : 'bg-opacity-60 hover:bg-opacity-90'
+                  }`}
+                >
+                  <SVGComponent className="size-12 mb-3" />
+                  <span className="text-center text-xs md:text-sm">
+                    {cat.name}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         <MainButton

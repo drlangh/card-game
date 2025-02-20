@@ -4,8 +4,8 @@ import { MainButton } from '@/components';
 export default function Home() {
   return (
     <div className="w-full h-full justify-center items-center flex flex-col py-10 px-6 md:px-60 gap-4">
-      <h1 className="text-[13vw] md:text-[5vw] text-white md:leading-[5.5rem] uppercase text-center">
-        <span className="wide-text font-normal text-[10vw] md:text-[4vw] tracking-wider">
+      <h1 className="text-[13vw] md:text-[5vw] text-white leading-6 md:leading-[5.5rem] uppercase text-center">
+        <span className="wide-text font-normal text-[6.5vw] md:text-[4vw] tracking-wider">
           <span className="text-blue-200">Healthy</span> vs{' '}
           <span className="text-rose-200">Toxic</span>
         </span>
@@ -14,7 +14,7 @@ export default function Home() {
           Masculinity
         </span>
       </h1>
-      <p className="text-lg md:text-xl text-white mb-14 drop-shadow-text text-center">
+      <p className="text-md md:text-xl text-white mb-14 drop-shadow-text text-center">
         Explore meaningful conversation starter cards about healthy
         and toxic masculinity by challenging stereotypes, spark
         dialogue, and foster growth in a safe, judgment-free space.

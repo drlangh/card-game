@@ -3,6 +3,7 @@ import { Roboto_Flex, Poppins, Handlee } from 'next/font/google';
 import { ToastContainer } from 'react-toastify';
 import InfoIcon from '@/components/InfoIcon';
 import AnimatedContainer from '@/components/AnimatedContainer';
+import PersistentCard from '@/components/persistentCard';
 
 const robotoFlex = Roboto_Flex({
   subsets: ['latin'],
@@ -34,11 +35,12 @@ export default function RootLayout({ children }) {
       <body
         className={`${robotoFlex.variable} ${poppins.className} ${updock.variable} antialiased`}
       >
-        <AnimatedContainer>
-          <div className="flex items-center justify-start w-screen min-h-dvh pt-6 md:pt-0">
+        <div className="flex items-center justify-start w-screen min-h-dvh">
+          <AnimatedContainer>
+            <PersistentCard />
             {children}
-          </div>
-        </AnimatedContainer>
+          </AnimatedContainer>
+        </div>
         <div className="absolute top-6 right-6">
           <InfoIcon />
         </div>

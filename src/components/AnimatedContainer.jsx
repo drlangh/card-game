@@ -26,18 +26,16 @@ export default function AnimatedContainer({ children }) {
       <AnimatePresence mode={'wait'} initial={false}>
         <motion.div
           key={pathname}
-          className="z-10 relative transform-gpu"
+          className="flex items-center justify-center size-full min-h-dvh z-10 relative transform-gpu"
           initial={{
             opacity: 0,
             y: '5%',
             filter: 'blur(10px)',
-            backdropFilter: 'blur(0px)',
           }}
           animate={{
             opacity: 1,
             y: 0,
             filter: 'blur(0px)',
-            backdropFilter: 'blur(10px)',
             transition: {
               duration: 0.6,
               ease: 'easeOut',
@@ -47,7 +45,6 @@ export default function AnimatedContainer({ children }) {
             opacity: 0,
             y: '-5%',
             filter: 'blur(10px)',
-            backdropFilter: 'blur(0px)',
             transition: {
               duration: 0.6,
               ease: 'easeIn',

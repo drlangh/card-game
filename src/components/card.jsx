@@ -1,6 +1,8 @@
 'use client';
 
 import useIsMobile from '@/hooks/useIsMobile';
+import useCardStore from '@/stores/cardStore';
+import useInformationStore from '@/stores/InformationStore';
 import {
   Center,
   PresentationControls,
@@ -10,46 +12,11 @@ import {
 } from '@react-three/drei';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useEffect, useRef } from 'react';
-import * as THREE from 'three';
-
-const createNoiseTexture = (intensity = 1) => {
-  const size = 256;
-  const data = new Uint8Array(size * size * 4);
-
-  for (let y = 0; y < size; y++) {
-    for (let x = 0; x < size; x++) {
-      const i = (y * size + x) * 4;
-
-      const noise = Math.random();
-      const noiseValue = Math.floor(noise * noise * intensity * 255);
-
-      data[i] = noiseValue; // R
-      data[i + 1] = noiseValue; // G
-      data[i + 2] = noiseValue; // B
-      data[i + 3] = 255; // A
-    }
-  }
-
-  const texture = new THREE.DataTexture(
-    data,
-    size,
-    size,
-    THREE.RGBAFormat
-  );
-
-  texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-  texture.repeat.set(4, 4);
-  texture.needsUpdate = true;
-  return texture;
-};
 
 const Card = ({ cardData, rotating, category, isMobile }) => {
   const meshRef = useRef();
   const cardRef = useRef();
   const svgRef = useRef();
-
-  const roughnessTexture = createNoiseTexture(0.8);
-  const normalTexture = createNoiseTexture(1.2);
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
@@ -71,36 +38,44 @@ const Card = ({ cardData, rotating, category, isMobile }) => {
 
     if (isMobile) {
       cardRef.current.rotation.z = Math.PI / 2;
-      svgRef.current.position.y = 1.8;
       state.camera.position.z = 8;
+      state.camera.position.y = 0.2;
+      if (svgRef.current) svgRef.current.position.y = 1.8;
     } else {
       cardRef.current.rotation.z = 0;
-      svgRef.current.position.y = 1.05;
+      if (svgRef.current) svgRef.current.position.y = 1.05;
       state.camera.position.z = 5;
+      state.camera.position.y = 0;
     }
   });
 
   useEffect(() => {
+    if (!svgRef.current) return;
+
     svgRef.current.traverse((child) => {
       if (child.isMesh) {
-        child.material.color.set('#58589d');
+        child.material.color.set('#3f3f78');
       }
     });
-  }, []);
+  }, [svgRef.current]);
 
   return (
     <group ref={meshRef}>
-      <Svg
-        ref={svgRef}
-        position={cardData ? [-0.14, 1.05, 0.02] : [-0.14, 0.2, 0.02]}
-        src={category.svgPath}
-        scale={0.012}
-        color="#58589d"
-      />
+      {category && (
+        <Svg
+          ref={svgRef}
+          position={
+            cardData ? [-0.14, 1.05, 0.02] : [-0.14, 0.2, 0.02]
+          }
+          src={category.svgPath}
+          scale={0.012}
+          color="#3f3f78"
+        />
+      )}
       <Text
         textAlign={!cardData ? 'center' : 'left'}
         position={[0, -0.1, 0.02]}
-        color="#58589d"
+        color="#3f3f78"
         anchorX="center"
         fontWeight={500}
         anchorY="middle"
@@ -118,20 +93,18 @@ const Card = ({ cardData, rotating, category, isMobile }) => {
         creaseAngle={0.4}
       >
         <meshPhysicalMaterial
-          transmission={0.85}
+          transmission={0.15}
           thickness={1.5}
-          roughness={0.9}
-          roughnessMap={roughnessTexture}
-          normalMap={normalTexture}
+          roughness={0.8}
           clearcoat={0.5}
           clearcoatRoughness={0.4}
           ior={1.45}
-          color={'#ffffff'}
-          attenuationColor={'#ffffff'}
+          color={'#fbf7ff'}
+          attenuationColor={'#ee71ff'}
           attenuationDistance={1}
-          opacity={0.9}
+          opacity={0.7}
           transparent={true}
-          metalness={0.1}
+          metalness={0.3}
           envMapIntensity={0.8}
         />
       </RoundedBox>
@@ -139,13 +112,10 @@ const Card = ({ cardData, rotating, category, isMobile }) => {
   );
 };
 
-export default function CardScene({
-  cardData,
-  rotating,
-  category,
-  setCardReady,
-}) {
+export default function CardScene() {
   const isMobile = useIsMobile();
+  const { category } = useInformationStore();
+  const { rotating, cardData, setCardReady } = useCardStore();
 
   return (
     <Canvas
@@ -155,8 +125,8 @@ export default function CardScene({
       }}
       className="-mt-9 md:mt-0"
       style={{ width: '100%', height: '100%' }}
-      onCreated={({ gl }) => {
-        setCardReady(true);
+      onCreated={() => {
+        if (setCardReady) setCardReady(true);
       }}
     >
       <PresentationControls

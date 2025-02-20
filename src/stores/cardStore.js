@@ -3,7 +3,7 @@ import { create } from 'zustand';
 const useCardStore = create((set) => ({
   rotating: false,
   cardReady: false,
-  cardData: 'Click "Generate Card" to begin.',
+  cardData: null,
   setRotating: (rotating) => set({ rotating }),
   setCardReady: (cardReady) => set({ cardReady }),
   setCardData: (cardData) => set({ cardData }),
