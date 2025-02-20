@@ -95,7 +95,7 @@ export default function LearnMorePopup({
               <IoClose size={24} />
             </button>
             <h2 className="wide-text text-left clear-right text-4xl leading-4 w-10/12 md:w-7/12 md:text-5xl md:leading-none">
-              Learn More of this Card
+              Learn More about this Card
             </h2>
 
             <div className="p-6 bg-white bg-opacity-50 rounded-xl my-10 text-base md:text-lg">
