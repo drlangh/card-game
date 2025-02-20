@@ -54,7 +54,6 @@ export async function getMoreInformation(
 
   for (let tries = 0; tries < MAX_TRIES; tries++) {
     try {
-      console.log('called');
       const completion = await model.generateContent([prompt2, file]);
       moreInformation = completion.response.text().trim();
 
