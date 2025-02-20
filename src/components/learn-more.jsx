@@ -41,10 +41,9 @@ export default function LearnMorePopup({
   }, [cardData, age, category, file, onClose, setLearnMoreInfo]);
 
   useEffect(() => {
-    if (learnMoreInfo) return;
-
+    if (!showPopup || learnMoreInfo) return;
     fetchMoreInformation();
-  }, [learnMoreInfo, fetchMoreInformation]);
+  }, [showPopup, learnMoreInfo, fetchMoreInformation]);
 
   return (
     <AnimatePresence className="size-full">
