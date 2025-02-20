@@ -20,9 +20,11 @@ export default function CardClient({ file }) {
     setCardData('Click "Generate Card" to begin.');
   }, []);
 
-  if (!age || !category) {
-    redirect('/categories');
-  }
+  useEffect(() => {
+    if (!age || !category) {
+      redirect('/categories');
+    }
+  }, [age, category]);
 
   return (
     <>
