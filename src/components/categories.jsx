@@ -7,6 +7,8 @@ import RoleSVG from '@/../public/role.svg';
 import ToxicSVG from '@/../public/toxic.svg';
 import useInformationStore from '@/stores/InformationStore';
 import { BackArrow, MainButton } from '.';
+import { useEffect } from 'react';
+import { redirect } from 'next/navigation';
 
 const categories = [
   {
@@ -39,10 +41,16 @@ const categories = [
 export default function Categories() {
   const { category, setCategory, age } = useInformationStore();
 
+  useEffect(() => {
+    if (!age) {
+      redirect('/age');
+    }
+  }, [age]);
+
   return (
     <div className="w-full h-full justify-center items-center flex flex-col py-10 px-6 lg:px-60 gap-4">
       <BackArrow
-        href={age ? '/age' : '/'}
+        href={'/age'}
         onClick={() => {
           setCategory(null);
         }}
@@ -102,10 +110,7 @@ export default function Categories() {
           </div>
         </div>
 
-        <MainButton
-          href={age ? '/card' : '/age'}
-          disabled={!category}
-        >
+        <MainButton href={'/card'} disabled={!category}>
           Next
         </MainButton>
       </div>

@@ -19,13 +19,13 @@ const ageRanges = [
 ];
 
 export default function Age() {
-  const { setAge, age, category } = useInformationStore();
+  const { setAge, age } = useInformationStore();
   const [missingAge, setMissingAge] = useState(false);
 
   return (
     <div className="w-full h-full justify-center items-center flex flex-col py-10 px-6 lg:px-60 gap-4">
       <BackArrow
-        href={category ? '/category' : '/'}
+        href={'/'}
         onClick={() => {
           setAge(null);
         }}
@@ -71,10 +71,7 @@ export default function Age() {
           </span>
         )}
 
-        <MainButton
-          href={category ? '/card' : '/categories'}
-          disabled={!age}
-        >
+        <MainButton href={'/categories'} disabled={!age}>
           Next
         </MainButton>
       </div>
