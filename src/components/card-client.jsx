@@ -31,19 +31,21 @@ export default function CardClient({ file }) {
       <BackArrow href={'/categories'} />
       <div
         className={
-          'w-full h-screen flex items-center justify-between flex-col relative z-10 py-10 md:py-20 pointer-events-none'
+          'w-full h-dvh flex items-center justify-between flex-col relative z-10 pt-14 md:py-20 pointer-events-none'
         }
       >
-        <h1 className="wide-text text-center text-3xl w-7/12 md:text-4xl !leading-9">
+        <h1 className="wide-text text-center text-2xl w-7/12 md:text-4xl !leading-7 md:!leading-9">
           {category && category.name}
         </h1>
         <div
-          className={`w-10/12 gap-6 mb-14 lg:w-1/3 md:mb-4 flex flex-row items-center ${
-            !rotating ? 'justify-between' : 'justify-center'
-          }`}
+          className={
+            'w-10/12 gap-6 mb-9 lg:w-1/3 md:mb-4 flex flex-row items-center justify-center'
+          }
         >
           {!rotating ? (
-            <>
+            <div
+              className={`w-full flex items-center gap-4 ${!cardData ? 'justify-between' : 'justify-center'}`}
+            >
               <MainButton
                 className={`pointer-events-auto transition-all duration-300 ${
                   cardReady
@@ -76,9 +78,9 @@ export default function CardClient({ file }) {
                   Learn More
                 </button>
               )}
-            </>
+            </div>
           ) : (
-            <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-white"></div>
+            <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-white" />
           )}
         </div>
       </div>

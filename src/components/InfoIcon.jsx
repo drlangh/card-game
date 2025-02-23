@@ -6,11 +6,12 @@ const InfoIcon = () => {
   const [showTooltip, setShowTooltip] = useState(false);
 
   return (
-    <div className="relative z-20">
+    <div className="relative z-30">
       <IoMdInformationCircleOutline
         size={24}
         color="#fff"
-        className="cursor-pointer ml-3 mb-3"
+        className="cursor-pointer ml-3 mb-1"
+        onClick={() => setShowTooltip(!showTooltip)}
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
       />

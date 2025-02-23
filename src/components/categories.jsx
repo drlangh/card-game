@@ -40,22 +40,22 @@ export default function Categories() {
   const { category, setCategory, age } = useInformationStore();
 
   return (
-    <div className="w-full h-full justify-center items-center flex flex-col py-10 px-6 md:px-60 gap-4">
+    <div className="w-full h-full justify-center items-center flex flex-col py-10 px-6 lg:px-60 gap-4">
       <BackArrow
         href={age ? '/age' : '/'}
         onClick={() => {
           setCategory(null);
         }}
       />
-      <div className="w-auto h-full flex items-center justify-center flex-col gap-6 max-w-[50rem]">
-        <h1 className="wide-text text-left text-4xl md:text-[3.3rem] leading-[4rem]">
+      <div className="w-auto h-full py-16 md:py-0 flex items-center justify-center flex-col gap-4 max-w-[50rem]">
+        <h1 className="wide-text text-left text-4xl md:text-[3.3rem] md:leading-[4rem]">
           Which category resonates with you?
         </h1>
         <p className="text-base md:text-lg opacity-80 text-left w-full">
           Pick a category to explore different perspectives on
           masculinity.
         </p>
-        <div className="w-full grid grid-cols-3 gap-4 auto-rows-auto justify-center md:flex md:flex-wrap items-center md:justify-between mb-8">
+        <div className="w-full grid grid-cols-3 gap-3 auto-rows-auto justify-center landscape:flex landscape:flex-wrap md:flex md:flex-wrap items-center md:justify-between mb-4">
           {categories.slice(0, 3).map((cat, index) => {
             const SVGComponent = cat.svgComponent;
             return (
@@ -71,13 +71,13 @@ export default function Categories() {
                 }`}
               >
                 <SVGComponent className="size-12 mb-3" />
-                <span className="text-center text-xs md:text-sm">
+                <span className="text-center text-xs lg:text-sm">
                   {cat.name}
                 </span>
               </button>
             );
           })}
-          <div className="col-span-3 flex justify-center gap-4">
+          <div className="col-span-3 flex justify-center gap-2 lg:gap-5">
             {categories.slice(3).map((cat, index) => {
               const SVGComponent = cat.svgComponent;
               return (

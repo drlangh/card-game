@@ -64,14 +64,14 @@ export default function LearnMorePopup({
             stiffness: 200,
           }}
           onClick={onClose}
-          className="fixed top-0 left-0 right-0 size-full bg-black/45 z-50 overflow-hidden"
+          className="fixed top-0 left-0 right-0 size-full pt-[10vh] bg-black/45 z-50 overflow-y-auto "
         >
           <motion.div
             initial={{
               y: '100%',
             }}
             animate={{
-              y: '10%',
+              y: '0%',
             }}
             exit={{
               y: '100%',
@@ -84,8 +84,8 @@ export default function LearnMorePopup({
             onClick={(e) => {
               e.stopPropagation();
             }}
-            className="relative bottom-0 left-0 right-0 w-full h-screen text-[#2D2D53] bg-learn-more
-                     overflow-y-auto overflow-x-hidden shadow-2xl p-9 md:px-20 md:py-10 rounded-t-3xl"
+            className="relative bottom-0 left-0 right-0 w-full min-h-full text-[#2D2D53] bg-learn-more
+                     overflow-hidden shadow-2xl px-7 py-9 md:px-20 md:py-10 rounded-t-3xl "
           >
             <button
               className="sticky top-4 md:-mr-7 float-right opacity-60 hover:opacity-100"
@@ -108,7 +108,7 @@ export default function LearnMorePopup({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.5 }}
-                  className="mb-24"
+                  className="mb-10"
                 >
                   <div className="mb-10 prose prose-sm max-w-none text-base md:text-lg">
                     <ReactMarkdown className="whitespace-pre-wrap">
@@ -135,46 +135,55 @@ export default function LearnMorePopup({
                 </motion.div>
               ) : (
                 <motion.div
-                  key="skeleton"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.5 }}
-                  className=" animate-pulse"
                 >
-                  <div className="mb-10 space-y-4">
-                    <div className="relative h-4 bg-[#433874]/30 rounded w-full overflow-hidden">
-                      <div className="absolute inset-0 shimmer" />
+                  <p className="mb-4 opacity-50">
+                    <span className="animate-spin inline-block">
+                      ✦
+                    </span>{' '}
+                    Generating...
+                  </p>
+                  <motion.div
+                    key="skeleton"
+                    className="animate-pulse"
+                  >
+                    <div className="mb-10 space-y-4">
+                      <div className="relative h-4 bg-[#433874]/30 rounded w-full overflow-hidden">
+                        <div className="absolute inset-0 shimmer" />
+                      </div>
+                      <div className="relative h-4 bg-[#433874]/30 rounded w-11/12 overflow-hidden">
+                        <div className="absolute inset-0 shimmer" />
+                      </div>
+                      <div className="relative h-4 bg-[#433874]/30 rounded w-10/12 overflow-hidden">
+                        <div className="absolute inset-0 shimmer" />
+                      </div>
+                      <div className="relative h-4 bg-[#433874]/30 rounded w-full overflow-hidden">
+                        <div className="absolute inset-0 shimmer" />
+                      </div>
+                      <div className="relative h-4 bg-[#433874]/30 rounded w-9/12 overflow-hidden">
+                        <div className="absolute inset-0 shimmer" />
+                      </div>
                     </div>
-                    <div className="relative h-4 bg-[#433874]/30 rounded w-11/12 overflow-hidden">
-                      <div className="absolute inset-0 shimmer" />
-                    </div>
-                    <div className="relative h-4 bg-[#433874]/30 rounded w-10/12 overflow-hidden">
-                      <div className="absolute inset-0 shimmer" />
-                    </div>
-                    <div className="relative h-4 bg-[#433874]/30 rounded w-full overflow-hidden">
-                      <div className="absolute inset-0 shimmer" />
-                    </div>
-                    <div className="relative h-4 bg-[#433874]/30 rounded w-9/12 overflow-hidden">
-                      <div className="absolute inset-0 shimmer" />
-                    </div>
-                  </div>
 
-                  <div className="mb-10 space-y-4">
-                    <div className="relative h-4 bg-[#433874]/30 rounded w-full overflow-hidden">
-                      <div className="absolute inset-0 shimmer" />
+                    <div className="mb-10 space-y-4">
+                      <div className="relative h-4 bg-[#433874]/30 rounded w-full overflow-hidden">
+                        <div className="absolute inset-0 shimmer" />
+                      </div>
+                      <div className="relative h-4 bg-[#433874]/30 rounded w-11/12 overflow-hidden">
+                        <div className="absolute inset-0 shimmer" />
+                      </div>
+                      <div className="relative h-4 bg-[#433874]/30 rounded w-10/12 overflow-hidden">
+                        <div className="absolute inset-0 shimmer" />
+                      </div>
                     </div>
-                    <div className="relative h-4 bg-[#433874]/30 rounded w-11/12 overflow-hidden">
-                      <div className="absolute inset-0 shimmer" />
-                    </div>
-                    <div className="relative h-4 bg-[#433874]/30 rounded w-10/12 overflow-hidden">
-                      <div className="absolute inset-0 shimmer" />
-                    </div>
-                  </div>
 
-                  <div className="relative mb-10 h-20 bg-[#433874]/30 rounded overflow-hidden">
-                    <div className="absolute inset-0 shimmer" />
-                  </div>
+                    <div className="relative mb-10 h-20 bg-[#433874]/30 rounded overflow-hidden">
+                      <div className="absolute inset-0 shimmer" />
+                    </div>
+                  </motion.div>
                 </motion.div>
               )}
             </AnimatePresence>

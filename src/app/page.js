@@ -1,16 +1,16 @@
 import GeminiLogo from '@/../public/gemini.svg';
 import { MainButton } from '@/components';
 
-export default function Home() {
+export default function Page() {
   return (
-    <div className="w-full h-full justify-center items-center flex flex-col py-10 px-6 md:px-60 gap-4">
-      <h1 className="text-[13vw] md:text-[5vw] text-white leading-6 md:leading-[5.5rem] uppercase text-center">
+    <div className="w-full h-full justify-center items-center flex flex-col py-10 px-6 lg:px-60 gap-4">
+      <h1 className="text-[13vw] md:text-[5vw] text-white leading-4 md:leading-[3rem] lg:leading-[5.5rem] uppercase text-center">
         <span className="wide-text font-normal text-[6.5vw] md:text-[4vw] tracking-wider">
           <span className="text-blue-200">Healthy</span> vs{' '}
           <span className="text-rose-200">Toxic</span>
         </span>
         <br />
-        <span className="wide-text font-black text-[10vw] md:text-[8vw]">
+        <span className="wide-text md:mt-0 font-black text-[10vw] md:text-[8vw]">
           Masculinity
         </span>
       </h1>

@@ -23,14 +23,14 @@ export default function Age() {
   const [missingAge, setMissingAge] = useState(false);
 
   return (
-    <div className="w-full h-full justify-center items-center flex flex-col py-10 px-6 md:px-60 gap-4">
+    <div className="w-full h-full justify-center items-center flex flex-col py-10 px-6 lg:px-60 gap-4">
       <BackArrow
         href={category ? '/category' : '/'}
         onClick={() => {
           setAge(null);
         }}
       />
-      <div className="w-auto h-full flex items-center justify-center flex-col gap-6 max-w-2xl">
+      <div className="w-auto h-full py-16 flex items-center justify-center flex-col gap-6 max-w-2xl">
         <h1 className="wide-text text-left text-4xl md:text-[3.3rem] leading-[4rem]">
           Which age range do you fall into?
         </h1>

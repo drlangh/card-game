@@ -39,7 +39,6 @@ const Card = ({ cardData, rotating, category, isMobile }) => {
     if (isMobile) {
       cardRef.current.rotation.z = Math.PI / 2;
       state.camera.position.z = 8;
-      state.camera.position.y = 0.2;
       if (svgRef.current) svgRef.current.position.y = 1.8;
     } else {
       cardRef.current.rotation.z = 0;
@@ -123,7 +122,6 @@ export default function CardScene() {
         position: [0, 0, 5],
         fov: 50,
       }}
-      className="-mt-9 md:mt-0"
       style={{ width: '100%', height: '100%' }}
       onCreated={() => {
         if (setCardReady) setCardReady(true);
