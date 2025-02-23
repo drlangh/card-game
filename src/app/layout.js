@@ -24,7 +24,7 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: 'Healthy vs. Toxic Masculinity',
+  title: 'Masculinity',
   description:
     'Explore meaningful conversation starter cards about healthy and toxic masculinity by challenging stereotypes, spark dialogue, and foster growth in a safe, judgment-free space. Start building a more authentic and inclusive masculinity today!',
 };
